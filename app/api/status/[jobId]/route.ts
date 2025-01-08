@@ -13,7 +13,7 @@ interface JobStatusResponse {
 
 export async function GET(
   request: Request,
-  { params }: { params: { jobId: string } },
+  { params }: { params: { jobId: string | null } },
 ) {
   if (!HUHU_API_KEY) {
     return NextResponse.json(
