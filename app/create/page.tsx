@@ -89,7 +89,7 @@ export default function Create() {
       if (!jobId) return;
 
       try {
-        const response = await fetch(`/api/status/${jobId}`);
+        const response = await fetch(`/api/status?jobId=${jobId}`);
 
         if (!response.ok) {
           throw new Error(`Status check failed: ${response.statusText}`);

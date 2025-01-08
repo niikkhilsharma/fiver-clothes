@@ -1,29 +1,20 @@
 import { NextResponse } from "next/server";
+import { type NextRequest } from "next/server";
 
 const HUHU_API_KEY = process.env.HUHU_API_KEY;
 const HUHU_API_URL = "https://api-service.huhu.ai/requests/v1";
 
-interface JobStatusResponse {
-  job_id: string;
-  status: string;
-  output?: Array<{
-    image_url: string;
-  }>;
-}
-
-export async function GET(
-  request: Request,
-  { params }: { params: { jobId: string | null } },
-) {
+export async function GET(request: NextRequest) {
   if (!HUHU_API_KEY) {
     return NextResponse.json(
       { error: "API key not configured" },
       { status: 500 },
     );
   }
+  const params = request?.nextUrl?.searchParams;
+  const jobId = params?.get("jobId");
 
   try {
-    const { jobId } = await params;
     const url = `${HUHU_API_URL}?job_id=${jobId}`;
 
     const response = await fetch(url, {
@@ -36,7 +27,7 @@ export async function GET(
       throw new Error(`Huhu API error: ${response.statusText}`);
     }
 
-    const data: JobStatusResponse = await response.json();
+    const data = await response.json();
 
     return NextResponse.json({
       jobId: data.job_id,
