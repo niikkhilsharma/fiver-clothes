@@ -27,7 +27,10 @@ export async function uploadToCloudinary(file: File) {
   return `https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/${data.publicId}`;
 }
 
-async function downloadImage(imgUrl: string, imageName: string = "Model") {
+export async function downloadImage(
+  imgUrl: string,
+  imageName: string = "Model",
+) {
   const image = await fetch(imgUrl);
   const imageBlog = await image.blob();
   const imageURL = URL.createObjectURL(imageBlog);
