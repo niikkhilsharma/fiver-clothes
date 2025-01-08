@@ -28,7 +28,7 @@ export default function Create() {
   const [jobStatus, setJobStatus] = useState<string | null>(null);
   const [jobId, setJobId] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
-
+  console.log(modelType, numImages, error);
   // Handle file uploads
   const handleFileUpload = async (
     file: File,
