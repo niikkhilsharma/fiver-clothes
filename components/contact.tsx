@@ -14,7 +14,7 @@ export default function Contact() {
     <motion.section
       id="contact"
       ref={ref}
-      className="mx-auto w-[min(100%,38rem)] max-w-screen-lg pb-10 pt-20 text-center"
+      className="mx-auto mt-6 w-[min(100%,38rem)] max-w-screen-lg py-10 text-center sm:mt-12"
       initial={{
         opacity: 0,
       }}

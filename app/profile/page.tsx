@@ -1,12 +1,25 @@
+import Profile from "@/components/profile";
+import { auth } from "@/auth";
 import Navbar from "@/components/navbar";
 
-export default async function Profile() {
+export default async function ProfilePage() {
+  const session = await auth();
+  console.log(session);
+
   return (
-    <>
+    <div>
       <Navbar />
-      <div className="p-4">
-        <h1>Profile Page</h1>
+      <div className="mx-auto max-w-screen-lg">
+        <Profile
+          user={{
+            email: session?.user?.email!,
+            id: session?.user?.id!,
+            image: session?.user?.image!,
+            name: session?.user?.name!,
+          }}
+        />
+        ;
       </div>
-    </>
+    </div>
   );
 }

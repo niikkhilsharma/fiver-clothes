@@ -5,41 +5,39 @@ import Image from "next/image";
 import { MdCloudUpload } from "react-icons/md";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
+import { uploadToCloudinary } from "@/lib/function";
 
 const ImageGallery = ({
-  garmentImages,
-  setGarmentImgUrl,
+  images,
+  setImgUrl,
 }: {
-  garmentImages: { image_url: string; image_id: string }[];
-  setGarmentImgUrl: (url: string) => void;
+  images: { image_url: string; image_id: string }[];
+  setImgUrl: (url: string) => void;
 }) => {
   return (
     <div className="mt-4 overflow-x-auto">
       <div className="grid w-max auto-cols-max grid-flow-col grid-rows-2 gap-2 pb-4">
-        <Label
-          htmlFor="garment-image"
-          className="flex max-h-20 min-h-20 min-w-16 max-w-16 flex-shrink-0 items-center justify-center rounded-lg border p-[0.05rem] hover:cursor-pointer hover:bg-gray-100"
-        >
+        <Label className="flex max-h-20 min-h-20 min-w-16 max-w-16 flex-shrink-0 items-center justify-center rounded-lg border p-[0.05rem] hover:cursor-pointer hover:bg-gray-100">
           <MdCloudUpload size={32} className="text-blue-600" />
           <Input
-            id="garment-image"
             type="file"
             accept="image/*"
             className="hidden"
-            onChange={(e) => {
-              const file = e.target.files?.[0];
-              if (file) setGarmentImgUrl(URL.createObjectURL(file));
+            onChange={async (e) => {
+              const file: File = e.target.files?.[0]!;
+              const url = await uploadToCloudinary(file);
+              setImgUrl(url);
             }}
           />
         </Label>
 
-        {garmentImages.map((garment, index) => (
+        {images.map((garment, index) => (
           <div
             key={index}
             className="max-h-20 min-h-20 min-w-16 max-w-16 flex-shrink-0 overflow-hidden rounded-lg border p-[0.05rem]"
           >
             <Image
-              onClick={() => setGarmentImgUrl(garment.image_url)}
+              onClick={() => setImgUrl(garment.image_url)}
               width={50}
               height={50}
               alt="Garment"

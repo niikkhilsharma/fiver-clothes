@@ -8,6 +8,7 @@ body {
 
 @layer base {
   :root {
+    --line-color: #e5e7eb;
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
     --card: 0 0% 100%;
@@ -36,6 +37,7 @@ body {
   }
 
   .dark {
+    --line-color: rgba(255, 255, 255, 0.2);
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
     --card: 222.2 84% 4.9%;

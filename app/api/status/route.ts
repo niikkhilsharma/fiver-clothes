@@ -13,6 +13,7 @@ export async function GET(request: NextRequest) {
   }
   const params = request?.nextUrl?.searchParams;
   const jobId = params?.get("jobId");
+  console.log(jobId);
 
   try {
     const url = `${HUHU_API_URL}?job_id=${jobId}`;
@@ -23,12 +24,13 @@ export async function GET(request: NextRequest) {
       },
     });
 
+    console.log(response, "response");
     if (!response.ok) {
       throw new Error(`Huhu API error: ${response.statusText}`);
     }
 
     const data = await response.json();
-
+    console.log(data, "from backend");
     return NextResponse.json({
       jobId: data.job_id,
       status: data.status,
@@ -36,7 +38,7 @@ export async function GET(request: NextRequest) {
         data.status === "completed" ? data.output?.[0]?.image_url : undefined,
     });
   } catch (error) {
-    console.error("Status check error:", error);
+    console.log("Status check error:", error);
     return NextResponse.json(
       { error: "Failed to check job status" },
       { status: 500 },

@@ -2,35 +2,38 @@
 
 import { useSectionInView } from "@/lib/hooks";
 import { Compare } from "./ui/compare";
+import Image from "next/image";
 
 export function Demo() {
   const { ref } = useSectionInView("Demo", 0.5);
   return (
-    <div className="p-4" ref={ref} id="demo">
+    <div ref={ref} id="demo">
       <div className="mx-auto max-w-screen-lg">
-        <h2 className="mb-16 text-center text-4xl font-bold">
+        <h2 className="my-10 flex items-center justify-center text-center text-3xl font-bold sm:text-start sm:text-2xl md:text-3xl lg:text-4xl">
           Features That Transform Your Fashion Imagery
         </h2>
-        <div className="flex gap-4">
+        <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
           <Compare
-            firstImage="/1.jpg"
-            secondImage="https://framerusercontent.com/images/c4EmAOZOYrRIJT54hh20j6k9G4.png"
+            firstImage="/assets/images/3a.webp"
+            secondImage="/assets/images/3a.webp"
             firstImageClassName="object-cover object-left-top"
             secondImageClassname="object-cover object-left-top"
             className="h-[200px] w-[200px] md:h-[500px] md:w-[500px]"
-            slideMode="hover"
+            slideMode="drag"
+            compare={false}
           />
           <Compare
-            firstImage="/2a.webp"
-            secondImage="/2b.png"
+            firstImage="/assets/images/m.png"
+            secondImage="/assets/images/m.png"
             firstImageClassName="object-cover object-left-top"
             secondImageClassname="object-cover object-left-top"
             className="h-[200px] w-[200px] md:h-[500px] md:w-[500px]"
-            slideMode="hover"
+            slideMode="drag"
+            compare={false}
           />
           <Compare
-            firstImage="/3a.webp"
-            secondImage="/3b.png"
+            firstImage="/assets/images/3a.webp"
+            secondImage="/assets/images/3b.png"
             firstImageClassName="object-cover object-left-top"
             secondImageClassname="object-cover object-left-top"
             className="h-[200px] w-[200px] md:h-[500px] md:w-[500px]"

@@ -13,7 +13,7 @@ export async function POST(request: Request) {
 
   try {
     const body = await request.json();
-    const { garmentType, garmentImgUrl, modelImgUrl } = body;
+    const { garmentType, garmentImgUrl, modelImgUrl, modelType } = body;
 
     if (!garmentType || !garmentImgUrl || !modelImgUrl) {
       return NextResponse.json(
@@ -32,9 +32,10 @@ export async function POST(request: Request) {
         image_garment_url: garmentImgUrl,
         image_model_url: modelImgUrl,
         garment_type: garmentType,
+        model_type: modelType,
       }),
     });
-
+    console.log(response, "response");
     if (!response.ok) {
       throw new Error(`Huhu API error: ${response.statusText}`);
     }

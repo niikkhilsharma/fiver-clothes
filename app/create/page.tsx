@@ -16,19 +16,24 @@ import { Button } from "@/components/ui/button";
 import { modelImages, garmentImages } from "@/lib/dummy-data";
 import { uploadToCloudinary } from "@/lib/function";
 import Navbar from "@/components/navbar";
+import { useToast } from "@/hooks/use-toast";
 
 export default function Create() {
+  const { toast } = useToast();
+
   const [garmentImgUrl, setGarmentImgUrl] = useState<string | null>(null);
   const [modelImgUrl, setModelImgUrl] = useState<string | null>(null);
   const [genImageUrl, setGenImage] = useState<string | null>(null);
   const [garmentType, setGarmentType] = useState<string | null>(null);
-  const [modelType, setModelType] = useState<string | null>(null);
+  // const [modelType, setModelType] = useState<string | null>(null);
+
   const [isLoading, setIsLoading] = useState(false);
   const [numImages, setNumImages] = useState("1");
+
   const [jobStatus, setJobStatus] = useState<string | null>(null);
   const [jobId, setJobId] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
-  console.log(modelType, numImages, error);
+  console.log(numImages, error);
   // Handle file uploads
   const handleFileUpload = async (
     file: File,
@@ -40,21 +45,53 @@ export default function Create() {
       setUrl(cloudinaryUrl);
     } catch (error) {
       console.error("Upload error:", error);
-      // Here you might want to show an error message to the user
+      toast({
+        variant: "destructive",
+        title: "Upload Failed",
+        description: "Failed to upload image. Please try again.",
+      });
     } finally {
       setIsLoading(false);
     }
   };
 
+  // Validate inputs before generation
+  const validateInputs = (): boolean => {
+    if (!garmentType) {
+      toast({
+        variant: "destructive",
+        title: "Missing Input",
+        description: "Please select the garment type.",
+      });
+      return false;
+    }
+    if (!garmentImgUrl) {
+      toast({
+        variant: "destructive",
+        title: "Missing Input",
+        description: "Please upload the garment image.",
+      });
+      return false;
+    }
+    if (!modelImgUrl) {
+      toast({
+        variant: "destructive",
+        title: "Missing Input",
+        description: "Please upload the model image.",
+      });
+      return false;
+    }
+    return true;
+  };
+
   // Handle generate button click
   const handleGenerate = async () => {
-    if (!garmentType || !garmentImgUrl || !modelImgUrl) {
-      // Show error message to user
-      return;
-    }
+    if (!validateInputs()) return;
 
     try {
       setIsLoading(true);
+      setError(null);
+
       const response = await fetch("/api/generate", {
         method: "POST",
         headers: {
@@ -64,6 +101,7 @@ export default function Create() {
           garmentType,
           garmentImgUrl,
           modelImgUrl,
+          numImages: parseInt(numImages),
         }),
       });
 
@@ -75,10 +113,15 @@ export default function Create() {
       setJobId(data.job_id);
       setJobStatus(data.status);
     } catch (error) {
-      console.error("Generation error:", error);
-      // Show error message to user
-    } finally {
-      // setIsLoading(false);
+      const errorMessage =
+        error instanceof Error ? error.message : "Generation failed";
+      toast({
+        variant: "destructive",
+        title: "Generation Failed",
+        description: errorMessage,
+      });
+      setError(errorMessage);
+      setIsLoading(false);
     }
   };
 
@@ -102,15 +145,31 @@ export default function Create() {
           setGenImage(data.imageUrl);
           clearInterval(intervalId);
           setIsLoading(false);
+          toast({
+            title: "Success",
+            description: "Image generated successfully!",
+          });
         } else if (data.status === "failed") {
           setIsLoading(false);
           setError("Image generation failed");
           clearInterval(intervalId);
+          toast({
+            variant: "destructive",
+            title: "Generation Failed",
+            description: "Failed to generate image. Please try again.",
+          });
         }
       } catch (err) {
-        setError(err instanceof Error ? err.message : "Failed to check status");
+        const errorMessage =
+          err instanceof Error ? err.message : "Failed to check status";
+        setError(errorMessage);
         setIsLoading(false);
         clearInterval(intervalId);
+        toast({
+          variant: "destructive",
+          title: "Status Check Failed",
+          description: errorMessage,
+        });
       }
     };
 
@@ -159,6 +218,7 @@ export default function Create() {
             </Label>
             <Input
               type="file"
+              accept="image/*"
               onChange={(e) => {
                 const file = e.target.files?.[0];
                 if (file) {
@@ -180,15 +240,12 @@ export default function Create() {
                 <SelectContent className="font-sans text-gray-600">
                   <SelectItem value="Top">Top</SelectItem>
                   <SelectItem value="Bottom">Bottom</SelectItem>
-                  <SelectItem value="Full Body">Full Body</SelectItem>
+                  <SelectItem value="Full body">Full Body</SelectItem>
                 </SelectContent>
               </Select>
             </Label>
 
-            <ImageGallery
-              garmentImages={garmentImages}
-              setGarmentImgUrl={setGarmentImgUrl}
-            />
+            <ImageGallery images={garmentImages} setImgUrl={setGarmentImgUrl} />
           </div>
 
           {/* Model Section */}
@@ -219,6 +276,7 @@ export default function Create() {
             </Label>
             <Input
               type="file"
+              accept="image/*"
               onChange={(e) => {
                 const file = e.target.files?.[0];
                 if (file) {
@@ -229,30 +287,9 @@ export default function Create() {
               className="hidden"
             />
 
-            <Label htmlFor="model_type" className="mt-2 hover:cursor-pointer">
-              <Select onValueChange={(value) => setModelType(value)}>
-                <SelectTrigger className="mt-4 w-full font-sans text-gray-600 focus:ring-gray-300">
-                  <SelectValue
-                    className="text-gray-600"
-                    placeholder="Filter Model"
-                  />
-                </SelectTrigger>
-                <SelectContent className="font-sans text-gray-600">
-                  <SelectItem value="Woman">Woman</SelectItem>
-                  <SelectItem value="Man">Man</SelectItem>
-                  <SelectItem value="Boy">Boy</SelectItem>
-                  <SelectItem value="Girl">Girl</SelectItem>
-                  <SelectItem value="Generated Model List">
-                    Generated Model List
-                  </SelectItem>
-                </SelectContent>
-              </Select>
-            </Label>
-
-            <ImageGallery
-              garmentImages={modelImages}
-              setGarmentImgUrl={setModelImgUrl}
-            />
+            <div className="mt-16">
+              <ImageGallery images={modelImages} setImgUrl={setModelImgUrl} />
+            </div>
           </div>
 
           {/* Generated Image Section */}
@@ -306,7 +343,22 @@ export default function Create() {
             <div>
               <Button
                 className="mt-4 w-full bg-blue-600 hover:bg-blue-600/90"
-                onClick={handleGenerate}
+                onClick={() => {
+                  if (!garmentType && !garmentImgUrl && !modelImgUrl) {
+                    const message = !garmentType
+                      ? "Please select the garment type."
+                      : !garmentImgUrl
+                        ? "Please upload the garment image."
+                        : "Please upload the model image.";
+                    toast({
+                      variant: "destructive",
+                      title: "Uh oh! Something went wrong.",
+                      description: message,
+                    });
+                    return;
+                  }
+                  handleGenerate();
+                }}
                 disabled={
                   isLoading || !garmentType || !garmentImgUrl || !modelImgUrl
                 }
