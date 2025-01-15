@@ -12,10 +12,10 @@ export default async function ProfilePage() {
       <div className="mx-auto max-w-screen-lg">
         <Profile
           user={{
-            email: session?.user?.email!,
-            id: session?.user?.id!,
-            image: session?.user?.image!,
-            name: session?.user?.name!,
+            email: session?.user?.email || "",
+            id: session?.user?.id || "",
+            image: session?.user?.image || "",
+            name: session?.user?.name || "",
           }}
         />
         ;

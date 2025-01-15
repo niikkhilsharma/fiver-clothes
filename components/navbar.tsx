@@ -13,8 +13,7 @@ const Navbar = () => {
   const session = useSession();
   const navbarLinks = [
     { name: "Home", url: "/" },
-    { name: "Try-On", url: "/create" },
-    { name: "Job History", url: "/job-history" },
+    { name: "Try", url: "/create" },
     // { name: "Profile", url: "/profile" },
   ];
 
@@ -37,7 +36,7 @@ const Navbar = () => {
                 href={link.url}
                 key={indx}
                 className={cn(
-                  "relative flex h-full items-center justify-center rounded-lg px-4 py-2 hover:cursor-pointer",
+                  "relative flex h-full items-center justify-center rounded-lg px-6 py-1 hover:cursor-pointer",
                   pathname === link.url && "bg-blue-500 text-white",
                   pathname !== link.url && "hover:bg-blue-500 hover:text-white",
                 )}

@@ -52,7 +52,7 @@ export default function Hero() {
         <Image
           className="w-full max-w-96 rounded-full sm:w-4/5 sm:max-w-full"
           src={
-            "https://framerusercontent.com/images/CxtfLWyxYWoXZbavuYgdHQROs.png"
+            "https://framerusercontent.com/images/CCAGhjHOco1Av6XJ4xBcPD6liI.png"
           }
           alt="AI-Generated Fashion Models"
           width={500}

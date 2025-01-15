@@ -1,10 +1,8 @@
 "use client";
-
 import { useState, useEffect } from "react";
 import { useSectionInView } from "@/lib/hooks";
 import { Check } from "lucide-react";
 import { Nunito_Sans } from "next/font/google";
-import axios from "axios";
 import Stripe from "stripe";
 import { loadStripe } from "@stripe/stripe-js";
 import { getAllActiveProductsWithPrice } from "@/utils/stripe/product";
@@ -74,7 +72,7 @@ export function Pricing() {
       {allProducts && (
         <>
           <div className="flex flex-col gap-4 sm:flex-row">
-            <div className="rounded-xl border border-gray-300 px-6 py-12 lg:max-w-96">
+            <div className="rounded-2xl border border-gray-300 px-6 py-12 lg:max-w-96">
               <h2 className="text-2xl font-semibold">{allProducts[0].name}</h2>
               <p className="font-sans text-sm">{allProducts[0].description}</p>
               <p className="mt-1 font-sans text-2xl">
@@ -99,7 +97,7 @@ export function Pricing() {
                 </p>
               </div>
             </div>
-            <div className="w-full rounded-xl border border-gray-300 bg-[#25B1A4] px-6 py-12 text-white">
+            <div className="w-full rounded-2xl border border-gray-300 bg-[#25B1A4] px-6 py-12 text-white">
               <h2 className="text-2xl font-semibold">{allProducts[2].name}</h2>
               <p className="font-sans text-sm">{allProducts[2].description}</p>
               <p className="mt-1 font-sans text-2xl">
@@ -129,7 +127,7 @@ export function Pricing() {
               </div>
             </div>
           </div>
-          <div className="mt-4 w-full rounded-xl border border-gray-300 bg-[#082A2B] px-6 py-12 text-white">
+          <div className="mt-4 w-full rounded-2xl border border-gray-300 bg-[#082A2B] px-6 py-12 text-white">
             <h2 className="text-2xl font-semibold">{allProducts[1].name}</h2>
             <p className="font-sans text-sm">{allProducts[1].description}</p>
             <p className="mt-1 font-sans text-2xl">

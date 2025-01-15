@@ -10,7 +10,7 @@ import Footer from "@/components/footer";
 
 export default function Home() {
   return (
-    <div className="px-4">
+    <div className="px-4 pt-28 sm:pt-36">
       <ActiveSectionContextProvider>
         <Header />
         <Hero />

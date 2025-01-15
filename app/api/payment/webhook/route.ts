@@ -3,7 +3,6 @@ import { NextRequest, NextResponse } from "next/server";
 import { headers } from "next/headers";
 import { stripe } from "@/utils/stripe/config";
 import prisma from "@/lib/prisma";
-import { sendEmail } from "@/actions/sendEmail";
 
 export async function POST(request: NextRequest) {
   const body = await request.text();
@@ -18,8 +17,8 @@ export async function POST(request: NextRequest) {
     console.log(event, "from webhook");
 
     const data = event.data.object;
-    const credits =
-      data.amount_total === 24 ? 5 : data.amount_total === 99 ? 25 : 50;
+    // const credits =
+    //   data.amount_total === 24 ? 5 : data.amount_total === 99 ? 25 : 50;
 
     console.log(event.data, "from webhook");
 

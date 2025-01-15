@@ -2,7 +2,6 @@
 
 import { useSectionInView } from "@/lib/hooks";
 import { Compare } from "./ui/compare";
-import Image from "next/image";
 
 export function Demo() {
   const { ref } = useSectionInView("Demo", 0.5);
@@ -18,7 +17,7 @@ export function Demo() {
             secondImage="/assets/images/3a.webp"
             firstImageClassName="object-cover object-left-top"
             secondImageClassname="object-cover object-left-top"
-            className="h-[200px] w-[200px] md:h-[500px] md:w-[500px]"
+            className="aspect-video w-4/5 md:h-[500px] md:w-[500px]"
             slideMode="drag"
             compare={false}
           />
@@ -27,7 +26,7 @@ export function Demo() {
             secondImage="/assets/images/m.png"
             firstImageClassName="object-cover object-left-top"
             secondImageClassname="object-cover object-left-top"
-            className="h-[200px] w-[200px] md:h-[500px] md:w-[500px]"
+            className="aspect-video w-4/5 md:h-[500px] md:w-[500px]"
             slideMode="drag"
             compare={false}
           />
@@ -36,7 +35,7 @@ export function Demo() {
             secondImage="/assets/images/3b.png"
             firstImageClassName="object-cover object-left-top"
             secondImageClassname="object-cover object-left-top"
-            className="h-[200px] w-[200px] md:h-[500px] md:w-[500px]"
+            className="aspect-video w-4/5 md:h-[500px] md:w-[500px]"
             slideMode="hover"
           />
         </div>

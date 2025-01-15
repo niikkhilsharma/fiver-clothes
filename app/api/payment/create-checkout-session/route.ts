@@ -1,4 +1,3 @@
-import { NextResponse } from "next/server";
 import { stripe } from "@/utils/stripe/config";
 
 export async function POST(req: Request) {
