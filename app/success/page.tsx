@@ -1,7 +1,6 @@
-// app/success/page.tsx
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { Loader2, CheckCircle2, XCircle } from "lucide-react";
 
@@ -16,6 +15,14 @@ interface PaymentStatus {
 }
 
 export default function SuccessPage() {
+  return (
+    <Suspense>
+      <Success />
+    </Suspense>
+  );
+}
+
+function Success() {
   const [paymentStatus, setPaymentStatus] = useState<PaymentStatus | null>(
     null,
   );

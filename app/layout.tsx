@@ -3,7 +3,6 @@ import "./globals.css";
 import { Comfortaa } from "next/font/google";
 import { Toaster } from "@/components/ui/toaster";
 import { SessionProvider } from "next-auth/react";
-import ThemeSwitch from "@/components/theme-switch";
 import ThemeContextProvider from "@/context/theme-context";
 
 const comfortaa = Comfortaa({

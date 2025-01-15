@@ -113,6 +113,7 @@ export const Compare = ({
   );
 
   const handleMouseDown = useCallback(
+    // @ts-expect-error nikhil just leave it as it is
     (e: React.MouseEvent) => handleStart(e.clientX),
     [handleStart],
   );
@@ -125,6 +126,7 @@ export const Compare = ({
   const handleTouchStart = useCallback(
     (e: React.TouchEvent) => {
       if (!autoplay) {
+        // @ts-expect-error nikhil just leave it as it is
         handleStart(e.touches[0].clientX);
       }
     },

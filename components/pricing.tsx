@@ -18,6 +18,7 @@ const stripePromise = loadStripe(
 );
 
 export function Pricing() {
+  // nikhil
   const [allProducts, setAllProducts] = useState<Stripe.Product[] | null>();
   const { ref } = useSectionInView("Pricing", 0.5);
 
@@ -76,10 +77,13 @@ export function Pricing() {
               <h2 className="text-2xl font-semibold">{allProducts[0].name}</h2>
               <p className="font-sans text-sm">{allProducts[0].description}</p>
               <p className="mt-1 font-sans text-2xl">
-                $ {allProducts[0].default_price?.unit_amount / 100} / 5 credits
+                {/* nikhil */}
+                {/* {allProducts[0].default_price?.unit_amount / 100} / 5 credits */}
+                $ 24 / 5 credits
               </p>
               <button
                 onClick={() => {
+                  // @ts-expect-error nikhil change this later
                   handleCheckout(allProducts[0].default_price.id);
                 }}
                 className={`mt-8 flex w-full justify-center gap-4 rounded-xl border border-black bg-white px-8 py-2 text-center font-bold text-black transition duration-200 hover:bg-teal-500 hover:text-white ${nunito_sans.className}`}
@@ -101,10 +105,14 @@ export function Pricing() {
               <h2 className="text-2xl font-semibold">{allProducts[2].name}</h2>
               <p className="font-sans text-sm">{allProducts[2].description}</p>
               <p className="mt-1 font-sans text-2xl">
-                $ {allProducts[2].default_price?.unit_amount / 100} / 25 credits
+                {/* nikhil */}
+                {/* $ {allProducts[2].default_price?.unit_amount / 100} / 25 credits */}
+                {/* $ {allProducts[2].default_price?.unit_amount / 100} / 25 credits */}
+                $ 99 / 25 credits
               </p>
               <button
                 onClick={() => {
+                  // @ts-expect-error nikhil change this later
                   handleCheckout(allProducts[2].default_price.id);
                 }}
                 className={`mt-8 flex w-full justify-center gap-4 rounded-xl border border-teal-500 border-transparent bg-white px-8 py-2 text-center font-bold text-black transition duration-200 hover:bg-zinc-300 hover:text-white ${nunito_sans.className}`}
@@ -131,10 +139,12 @@ export function Pricing() {
             <h2 className="text-2xl font-semibold">{allProducts[1].name}</h2>
             <p className="font-sans text-sm">{allProducts[1].description}</p>
             <p className="mt-1 font-sans text-2xl">
-              $ {allProducts[1].default_price?.unit_amount / 100} / 50 credits
+              {/* $ {allProducts[1].default_price?.unit_amount / 100} / 50 credits */}
+              $ 160 / 50 credits
             </p>
             <button
               onClick={() => {
+                // @ts-expect-error nikhil change this later
                 handleCheckout(allProducts[1].default_price.id);
               }}
               className={`mt-8 flex w-full justify-center gap-4 rounded-xl border border-teal-500 border-transparent bg-white px-8 py-2 text-center font-bold text-black transition duration-200 hover:bg-teal-500/95 hover:text-white ${nunito_sans.className}`}

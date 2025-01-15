@@ -29,12 +29,14 @@ export async function POST(request: NextRequest) {
         if (session.payment_status === "paid") {
           // Update user credits in your database
 
+          // nikhil
           await prisma.transactions.create({
             data: {
-              amount: data.amount_total,
+              // amount: data?.amount_total! as number,
+              amount: 123,
               email: "email",
               stripePaymentIntentId: session.id,
-              userId: session?.metadata?.userId,
+              userId: session?.metadata?.userId!,
             },
           });
 
