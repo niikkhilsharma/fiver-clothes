@@ -8,6 +8,10 @@ const nextConfig: NextConfig = {
       "huhu-web-statics.s3.us-west-2.amazonaws.com",
     ],
   },
+  i18n: {
+    locales: ["en", "es"],
+    defaultLocale: "es",
+  },
 };
 
 export default nextConfig;
