@@ -11,6 +11,7 @@ import { cn } from "@/lib/utils";
 
 const merriweather = Merriweather({
   weight: ["400"],
+  subsets: ["latin"],
 });
 
 export default function Header() {
