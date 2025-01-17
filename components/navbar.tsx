@@ -18,7 +18,7 @@ const Navbar = () => {
   ];
 
   return (
-    <div className="border bg-white px-8 py-2">
+    <div className="px-8 py-2">
       <div className="mx-auto flex max-w-screen-2xl items-center justify-between">
         <Link href="/">
           <Image

@@ -17,8 +17,11 @@ const ImageGallery = ({
   return (
     <div className="mt-4 overflow-x-auto">
       <div className="grid w-max auto-cols-max grid-flow-col grid-rows-2 gap-2 pb-4">
-        <Label className="flex max-h-20 min-h-20 min-w-16 max-w-16 flex-shrink-0 items-center justify-center rounded-lg border p-[0.05rem] hover:cursor-pointer hover:bg-gray-100">
-          <MdCloudUpload size={32} className="text-blue-600" />
+        <Label className="flex max-h-20 min-h-20 min-w-16 max-w-16 flex-shrink-0 items-center justify-center rounded-lg border bg-white p-[0.05rem] hover:cursor-pointer hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-800/80">
+          <MdCloudUpload
+            size={32}
+            className="text-blue-600 dark:text-gray-400"
+          />
           <Input
             type="file"
             accept="image/*"

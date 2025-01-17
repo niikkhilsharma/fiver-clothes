@@ -1,4 +1,5 @@
 export const links = [
+  { name: "Polara", hash: "/" },
   {
     name: "Home",
     hash: "#home",

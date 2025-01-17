@@ -1,10 +1,11 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Image as ImageIcon } from "lucide-react";
 import Image from "next/image";
 import ImageGallery from "@/components/image-gallery";
+import ActiveSectionContextProvider from "@/context/active-section-context";
 import {
   Select,
   SelectContent,
@@ -15,8 +16,8 @@ import {
 import { Button } from "@/components/ui/button";
 import { modelImages, garmentImages } from "@/lib/dummy-data";
 import { uploadToCloudinary } from "@/lib/function";
-import Navbar from "@/components/navbar";
 import { useToast } from "@/hooks/use-toast";
+import Header from "@/components/header";
 
 export default function Create() {
   const { toast } = useToast();
@@ -25,7 +26,6 @@ export default function Create() {
   const [modelImgUrl, setModelImgUrl] = useState<string | null>(null);
   const [genImageUrl, setGenImage] = useState<string | null>(null);
   const [garmentType, setGarmentType] = useState<string | null>(null);
-  // const [modelType, setModelType] = useState<string | null>(null);
 
   const [isLoading, setIsLoading] = useState(false);
   const [numImages, setNumImages] = useState("1");
@@ -185,187 +185,189 @@ export default function Create() {
   }, [jobId, jobStatus]);
 
   return (
-    <div className="min-h-screen bg-gray-100">
-      <Navbar />
-      <div className="py-8">
-        <div className="mx-auto flex max-w-screen-lg gap-4 px-4">
-          {/* Garment Section */}
-          <div className="w-1/3">
-            <p className="font-sans font-medium text-gray-500">
-              Please upload or select a garment:
-            </p>
-            <Label htmlFor="garment" className="mt-2 hover:cursor-pointer">
-              <div className="mt-2 flex h-[26rem] flex-col items-center justify-center gap-2 rounded-lg border bg-white font-sans font-bold text-gray-600">
-                {garmentImgUrl ? (
-                  <Image
-                    width={100}
-                    height={100}
-                    alt="Garment"
-                    src={garmentImgUrl}
-                    className="h-full w-full object-contain"
-                    quality={100}
-                    unoptimized
-                  />
-                ) : (
-                  <div className="flex flex-col items-center justify-center gap-2 p-2 text-xs text-gray-400">
-                    <ImageIcon />
-                    <p className="text-center">
-                      Input Garment Would be displayed here.
-                    </p>
-                  </div>
-                )}
-              </div>
-            </Label>
-            <Input
-              type="file"
-              accept="image/*"
-              onChange={(e) => {
-                const file = e.target.files?.[0];
-                if (file) {
-                  handleFileUpload(file, setGarmentImgUrl);
-                }
-              }}
-              id="garment"
-              className="hidden"
-            />
-
-            <Label htmlFor="garment_type" className="mt-2 hover:cursor-pointer">
-              <Select onValueChange={(value) => setGarmentType(value)}>
-                <SelectTrigger className="mt-4 w-full font-sans text-gray-600 focus:ring-gray-300">
-                  <SelectValue
-                    placeholder="Please select a garment type"
-                    className="text-gray-600"
-                  />
-                </SelectTrigger>
-                <SelectContent className="font-sans text-gray-600">
-                  <SelectItem value="Top">Top</SelectItem>
-                  <SelectItem value="Bottom">Bottom</SelectItem>
-                  <SelectItem value="Full body">Full Body</SelectItem>
-                </SelectContent>
-              </Select>
-            </Label>
-
-            <ImageGallery images={garmentImages} setImgUrl={setGarmentImgUrl} />
-          </div>
-
-          {/* Model Section */}
-          <div className="w-1/3">
-            <p className="font-sans font-medium text-gray-500">
-              Please upload or select a model:
-            </p>
-            <Label htmlFor="model" className="mt-2 hover:cursor-pointer">
-              <div className="mt-2 flex h-[26rem] flex-col items-center justify-center gap-2 rounded-lg border bg-white font-sans font-bold text-gray-600">
-                {modelImgUrl ? (
-                  <Image
-                    unoptimized
-                    width={100}
-                    height={100}
-                    alt="Model"
-                    src={modelImgUrl}
-                    className="h-full w-full object-contain"
-                  />
-                ) : (
-                  <div className="flex flex-col items-center justify-center gap-2 p-2 text-xs text-gray-400">
-                    <ImageIcon />
-                    <p className="text-center">
-                      Input Model will be displayed here.
-                    </p>
-                  </div>
-                )}
-              </div>
-            </Label>
-            <Input
-              type="file"
-              accept="image/*"
-              onChange={(e) => {
-                const file = e.target.files?.[0];
-                if (file) {
-                  handleFileUpload(file, setModelImgUrl);
-                }
-              }}
-              id="model"
-              className="hidden"
-            />
-
-            <div className="mt-16">
-              <ImageGallery images={modelImages} setImgUrl={setModelImgUrl} />
-            </div>
-          </div>
-
-          {/* Generated Image Section */}
-          <div className="w-1/3">
-            <p className="font-sans font-medium text-gray-500">
-              Generated image:
-            </p>
-
-            <div className="mt-2 flex h-[26rem] flex-col items-center justify-center gap-2 rounded-lg border bg-white font-sans font-bold text-gray-600">
-              {genImageUrl ? (
+    <div className="min-h-screen">
+      <ActiveSectionContextProvider>
+        <Header />
+      </ActiveSectionContextProvider>
+      {/* <div className="mx-auto flex max-w-screen-lg flex-wrap justify-center gap-2 overflow-x-hidden px-4 py-8 md:flex-nowrap lg:gap-2"> */}
+      <div className="mx-auto my-32 flex max-w-screen-lg flex-wrap justify-center gap-4 px-4 md:flex-nowrap md:justify-between">
+        {/* Garment Section */}
+        <div className="w-full sm:w-[48%] md:w-[31%]">
+          <p className="font-sans font-medium md:h-12 lg:h-auto">
+            Please upload or select a garment:
+          </p>
+          <Label htmlFor="garment" className="mt-2 hover:cursor-pointer">
+            <div className="mt-2 flex h-[26rem] flex-col items-center justify-center gap-2 rounded-lg border bg-white font-sans font-bold dark:bg-gray-900/80">
+              {garmentImgUrl ? (
                 <Image
-                  unoptimized
                   width={100}
                   height={100}
-                  alt="Generated Image"
-                  src={genImageUrl}
+                  alt="Garment"
+                  src={garmentImgUrl}
                   className="h-full w-full object-contain"
+                  quality={100}
+                  unoptimized
                 />
               ) : (
-                <div className="flex flex-col items-center justify-center gap-2 p-2 text-xs text-gray-400">
+                <div className="flex flex-col items-center justify-center gap-2 p-2 text-xs">
                   <ImageIcon />
                   <p className="text-center">
-                    Generated image will be displayed here.
+                    Input Garment Would be displayed here.
                   </p>
                 </div>
               )}
             </div>
+          </Label>
+          <Input
+            type="file"
+            accept="image/*"
+            onChange={(e) => {
+              const file = e.target.files?.[0];
+              if (file) {
+                handleFileUpload(file, setGarmentImgUrl);
+              }
+            }}
+            id="garment"
+            className="hidden"
+          />
 
-            <div className="mt-4 flex items-center gap-2">
-              <Label
-                htmlFor="num_images"
-                className="w-full font-sans text-sm hover:cursor-pointer"
-              >
-                Number of images:
-              </Label>
-              <Select
-                defaultValue="1"
-                onValueChange={(value) => setNumImages(value)}
-              >
-                <SelectTrigger className="font-sans text-gray-600 focus:ring-gray-300">
-                  <SelectValue className="text-gray-600" />
-                </SelectTrigger>
-                <SelectContent className="font-sans text-gray-600">
-                  <SelectItem value="1">1</SelectItem>
-                  <SelectItem value="2">2</SelectItem>
-                  <SelectItem value="3">3</SelectItem>
-                  <SelectItem value="4">4</SelectItem>
-                </SelectContent>
-              </Select>
+          <Label htmlFor="garment_type" className="mt-2 hover:cursor-pointer">
+            <Select onValueChange={(value) => setGarmentType(value)}>
+              <SelectTrigger className="mt-4 w-full font-sans focus:ring-gray-300">
+                <SelectValue
+                  placeholder="Please select a garment type"
+                  className="md:w-[31%]"
+                />
+              </SelectTrigger>
+              <SelectContent className="font-sans">
+                <SelectItem value="Top">Top</SelectItem>
+                <SelectItem value="Bottom">Bottom</SelectItem>
+                <SelectItem value="Full body">Full Body</SelectItem>
+              </SelectContent>
+            </Select>
+          </Label>
+
+          <ImageGallery images={garmentImages} setImgUrl={setGarmentImgUrl} />
+        </div>
+
+        {/* Model Section */}
+        <div className="w-full sm:w-[48%] md:w-[31%]">
+          <p className="font-sans font-medium md:h-12 lg:h-auto">
+            Please upload or select a model:
+          </p>
+          <Label htmlFor="model" className="mt-2 hover:cursor-pointer">
+            <div className="mt-2 flex h-[26rem] flex-col items-center justify-center gap-2 rounded-lg border bg-white font-sans font-bold dark:bg-gray-900/80">
+              {modelImgUrl ? (
+                <Image
+                  unoptimized
+                  width={100}
+                  height={100}
+                  alt="Model"
+                  src={modelImgUrl}
+                  className="h-full w-full object-contain"
+                />
+              ) : (
+                <div className="flex flex-col items-center justify-center gap-2 p-2 text-xs">
+                  <ImageIcon />
+                  <p className="text-center">
+                    Input Model will be displayed here.
+                  </p>
+                </div>
+              )}
             </div>
-            <div>
-              <Button
-                className="mt-4 w-full bg-blue-600 hover:bg-blue-600/90"
-                onClick={() => {
-                  if (!garmentType && !garmentImgUrl && !modelImgUrl) {
-                    const message = !garmentType
-                      ? "Please select the garment type."
-                      : !garmentImgUrl
-                        ? "Please upload the garment image."
-                        : "Please upload the model image.";
-                    toast({
-                      variant: "destructive",
-                      title: "Uh oh! Something went wrong.",
-                      description: message,
-                    });
-                    return;
-                  }
-                  handleGenerate();
-                }}
-                disabled={
-                  isLoading || !garmentType || !garmentImgUrl || !modelImgUrl
+          </Label>
+          <Input
+            type="file"
+            accept="image/*"
+            onChange={(e) => {
+              const file = e.target.files?.[0];
+              if (file) {
+                handleFileUpload(file, setModelImgUrl);
+              }
+            }}
+            id="model"
+            className="hidden"
+          />
+
+          <div className="mt-16">
+            <ImageGallery images={modelImages} setImgUrl={setModelImgUrl} />
+          </div>
+        </div>
+
+        {/* Generated Image Section */}
+        <div className="w-full sm:max-w-80 md:w-[31%]">
+          <p className="font-sans font-medium md:h-12 lg:h-auto">
+            Generated image:
+          </p>
+
+          <div className="mt-2 flex h-[26rem] flex-col items-center justify-center gap-2 rounded-lg border bg-white font-sans font-bold dark:bg-gray-900/80">
+            {genImageUrl ? (
+              <Image
+                unoptimized
+                width={100}
+                height={100}
+                alt="Generated Image"
+                src={genImageUrl}
+                className="h-full w-full object-contain"
+              />
+            ) : (
+              <div className="flex flex-col items-center justify-center gap-2 p-2 text-xs">
+                <ImageIcon />
+                <p className="text-center">
+                  Generated image will be displayed here.
+                </p>
+              </div>
+            )}
+          </div>
+
+          {/* <div className="mt-4 flex items-center gap-2">
+            <Label
+              htmlFor="num_images"
+              className="w-full font-sans text-sm hover:cursor-pointer"
+            >
+              Number of images:
+            </Label>
+            <Select
+              defaultValue="1"
+              onValueChange={(value) => setNumImages(value)}
+            >
+              <SelectTrigger className="font-sans focus:ring-gray-300">
+                <SelectValue className="md:w-[31%]" />
+              </SelectTrigger>
+              <SelectContent className="font-sans">
+                <SelectItem value="1">1</SelectItem>
+                <SelectItem value="2">2</SelectItem>
+                <SelectItem value="3">3</SelectItem>
+                <SelectItem value="4">4</SelectItem>
+              </SelectContent>
+            </Select>
+          </div> */}
+          <div>
+            <Button
+              className="mt-4 w-full"
+              variant={"outline"}
+              onClick={() => {
+                if (!garmentType && !garmentImgUrl && !modelImgUrl) {
+                  const message = !garmentType
+                    ? "Please select the garment type."
+                    : !garmentImgUrl
+                      ? "Please upload the garment image."
+                      : "Please upload the model image.";
+                  toast({
+                    variant: "destructive",
+                    title: "Uh oh! Something went wrong.",
+                    description: message,
+                  });
+                  return;
                 }
-              >
-                {isLoading ? "Processing..." : "Generate Model"}
-              </Button>
-            </div>
+                handleGenerate();
+              }}
+              disabled={
+                isLoading || !garmentType || !garmentImgUrl || !modelImgUrl
+              }
+            >
+              {isLoading ? "Processing..." : "Generate Model"}
+            </Button>
           </div>
         </div>
       </div>

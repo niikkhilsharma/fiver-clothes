@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import ThemeSwitch from "@/components/theme-switch";
 import "./globals.css";
 import { Comfortaa } from "next/font/google";
 import { Toaster } from "@/components/ui/toaster";
@@ -24,7 +25,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      {/* bg-gradient-to-b from-blue-100 to-white */}
       <ThemeContextProvider>
         <body
           className={`antialiased ${comfortaa.variable} ${comfortaa.className} relative bg-gray-50 text-gray-950 dark:bg-gray-900 dark:text-gray-50 dark:text-opacity-90`}
@@ -35,7 +35,7 @@ export default function RootLayout({
             <SessionProvider>{children}</SessionProvider>
             <Toaster />
           </main>
-          {/* <ThemeSwitch /> */}
+          <ThemeSwitch />
         </body>
       </ThemeContextProvider>
     </html>
