@@ -1,92 +1,74 @@
 import Stripe from "stripe";
 import { NextRequest, NextResponse } from "next/server";
 import { headers } from "next/headers";
+import { createTransaction } from "@/utils/db/actions";
 import { stripe } from "@/utils/stripe/config";
-import prisma from "@/lib/prisma";
+
+const endpointSecret = process.env.STRIPE_SECRET_WEBHOOK_KEY!;
 
 export async function POST(request: NextRequest) {
   const body = await request.text();
-  const endpointSecret = process.env.STRIPE_SECRET_WEBHOOK_KEY!;
   const sig = (await headers()).get("stripe-signature") as string;
 
   let event: Stripe.Event;
 
   try {
     event = stripe.webhooks.constructEvent(body, sig, endpointSecret);
+  } catch (err) {
+    console.log(err);
+    return new Response(`Webhook Error: ${err}`, {
+      status: 400,
+    });
+  }
 
-    console.log(event, "from webhook");
+  switch (event.type) {
+    case "checkout.session.completed": {
+      const session = event.data.object as Stripe.Checkout.Session;
+      console.log("Processing checkout session:", session.id);
 
-    const data = event.data.object;
-    // const credits =
-    //   data.amount_total === 24 ? 5 : data.amount_total === 99 ? 25 : 50;
+      const transactionDetails = {
+        userEmail: session.metadata?.userEmail!,
+        priceId: session.metadata?.priceId!,
+        created: session.created,
+        currency: session.currency,
+        customerDetails: session.customer_details,
+        amount: session.amount_total,
+      };
 
-    console.log(event.data, "from webhook");
+      const creditsToProvide =
+        session.amount_total === 2400
+          ? 5
+          : session.amount_total === 9900
+            ? 25
+            : session.amount_total === 16000
+              ? 50
+              : 0;
 
-    switch (event.type) {
-      case "checkout.session.completed": {
-        const session = event.data.object;
-        // Verify the payment status
-        if (session.payment_status === "paid") {
-          // Update user credits in your database
-
-          // nikhil
-          await prisma.transactions.create({
-            data: {
-              // amount: data?.amount_total! as number,
-              amount: 123,
-              email: "email",
-              stripePaymentIntentId: session.id,
-              userId: session?.metadata?.userId!,
-            },
-          });
-
-          // Send confirmation email
-          // await sendEmail({
-          //   email: session.customer_details?.email,
-          //   orderDetails: {
-          //     amount: session.amount_total,
-          //     productName: session.metadata.productName,
-          //   },
-          // });
-
-          // Log successful payment
-          console.log("Payment successful:", session.id);
-        }
-        break;
+      try {
+        await createTransaction({ transactionDetails, creditsToProvide });
+        console.log("Successfully processed session:", session.id);
+      } catch (error) {
+        console.error("Error processing transaction:", error);
       }
 
-      case "charge.failed": {
-        const charge = event.data.object;
-        console.error("Payment failed:", charge.id);
-        // Handle failed payment
-        // await handleFailedPayment(charge);
-        break;
-      }
-
-      case "charge.failed": {
-        const charge = event.data.object;
-        console.error("Payment failed:", charge.id);
-        // Handle failed payment
-        // await handleFailedPayment(charge);
-        break;
-      }
+      break;
     }
 
-    return NextResponse.json({ received: true });
-  } catch (error) {
-    console.error("Webhook error:", error);
-    return NextResponse.json(
-      {
-        error:
-          error instanceof Error ? error.message : "Webhook handler failed",
-      },
-      { status: 400 },
-    );
-  }
-}
+    case "payment_intent.succeeded": {
+      const paymentIntent = event.data.object as Stripe.PaymentIntent;
+      console.log("Payment succeeded:", paymentIntent.id);
+      break;
+    }
 
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
+    case "payment_intent.payment_failed": {
+      const paymentIntent = event.data.object as Stripe.PaymentIntent;
+      console.log("Payment failed:", paymentIntent.id);
+      break;
+    }
+
+    default: {
+      console.log(`Unhandled event type: ${event.type}`);
+    }
+  }
+  return NextResponse.json({ received: true }, { status: 200 });
+}

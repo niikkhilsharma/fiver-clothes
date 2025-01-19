@@ -1,6 +1,6 @@
 "use client";
 
-import { useSectionInView } from "@/lib/hooks";
+import { useSectionInView } from "@/hooks/hooks";
 import { Compare } from "./ui/compare";
 
 export function Demo() {

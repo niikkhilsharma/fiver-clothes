@@ -1,0 +1,8 @@
+{
+  "greeting": "Hello",
+  "welcome": "Welcome to our site",
+  "about": {
+    "title": "About Us",
+    "description": "We are a global company"
+  }
+}

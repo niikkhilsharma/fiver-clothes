@@ -14,10 +14,12 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
-import { modelImages, garmentImages } from "@/lib/dummy-data";
+import { modelImages, garmentImages } from "@/lib/data";
 import { uploadToCloudinary } from "@/lib/function";
 import { useToast } from "@/hooks/use-toast";
 import Header from "@/components/header";
+import { ToastAction } from "@/components/ui/toast";
+import Link from "next/link";
 
 export default function Create() {
   const { toast } = useToast();
@@ -33,7 +35,7 @@ export default function Create() {
   const [jobStatus, setJobStatus] = useState<string | null>(null);
   const [jobId, setJobId] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
-  console.log(numImages, error);
+
   // Handle file uploads
   const handleFileUpload = async (
     file: File,
@@ -87,6 +89,7 @@ export default function Create() {
   // Handle generate button click
   const handleGenerate = async () => {
     if (!validateInputs()) return;
+    let payNow = false;
 
     try {
       setIsLoading(true);
@@ -106,7 +109,13 @@ export default function Create() {
       });
 
       if (!response.ok) {
-        throw new Error("Generation failed");
+        console.log(response);
+        console.log(response.status, typeof response.status);
+
+        if (response.status == 403) payNow = true;
+        const errorMessage =
+          (await response.json()).error || "Generation Failed";
+        throw new Error(errorMessage);
       }
 
       const data = await response.json();
@@ -115,11 +124,27 @@ export default function Create() {
     } catch (error) {
       const errorMessage =
         error instanceof Error ? error.message : "Generation failed";
-      toast({
-        variant: "destructive",
-        title: "Generation Failed",
-        description: errorMessage,
-      });
+      console.log(error);
+
+      if (payNow) {
+        toast({
+          title: "Generation Failed",
+          description: errorMessage,
+          action: (
+            <ToastAction altText="Try again">
+              <Link href={"/#pricing"}>Pay Now</Link>
+            </ToastAction>
+          ),
+          variant: "destructive",
+        });
+      } else {
+        toast({
+          variant: "destructive",
+          title: "Generation Failed",
+          description: errorMessage,
+        });
+      }
+
       setError(errorMessage);
       setIsLoading(false);
     }

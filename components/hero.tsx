@@ -1,6 +1,6 @@
 "use client";
 
-import { useSectionInView } from "@/lib/hooks";
+import { useSectionInView } from "@/hooks/hooks";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";

@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import { useSectionInView } from "@/lib/hooks";
+import { useSectionInView } from "@/hooks/hooks";
 import { Check } from "lucide-react";
 import { Nunito_Sans } from "next/font/google";
 import Stripe from "stripe";
@@ -13,18 +13,18 @@ const nunito_sans = Nunito_Sans({
   display: "swap",
 });
 
-const stripePromise = loadStripe(
-  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string,
-);
-
 export function Pricing() {
   // nikhil
-  const [allProducts, setAllProducts] = useState<Stripe.Product[] | null>();
+  const [allProducts, setAllProducts] = useState<Stripe.Product[]>([]);
   const { ref } = useSectionInView("Pricing", 0.5);
 
   const handleCheckout = async (priceId: string) => {
     try {
-      const stripe = (await stripePromise)!;
+      const stripe = await loadStripe(
+        process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!,
+      );
+
+      if (!stripe) return;
 
       // Create checkout session
       const response = await fetch("/api/payment/create-checkout-session", {
@@ -35,15 +35,14 @@ export function Pricing() {
         body: JSON.stringify({ priceId }),
       });
 
+      if (!response.ok) {
+        throw new Error("Something went wrong");
+      }
+
       const { sessionId } = await response.json();
-      console.log(sessionId, "from here");
-      const result = await stripe.redirectToCheckout({
+      await stripe.redirectToCheckout({
         sessionId,
       });
-
-      if (result.error) {
-        console.error(result.error);
-      }
     } catch (error) {
       console.error("Error:", error);
     }
@@ -53,6 +52,7 @@ export function Pricing() {
     const fetchProducts = async () => {
       try {
         const activeProducts = await getAllActiveProductsWithPrice();
+        console.log(activeProducts, activeProducts?.length);
         setAllProducts(activeProducts);
       } catch (error) {
         console.error("Error fetching products:", error);
@@ -61,6 +61,7 @@ export function Pricing() {
     fetchProducts();
   }, []);
 
+  if (!(allProducts.length > 0)) return;
   return (
     <div
       className="mx-auto my-10 max-w-screen-lg sm:my-20"
@@ -77,9 +78,7 @@ export function Pricing() {
               <h2 className="text-2xl font-semibold">{allProducts[0].name}</h2>
               <p className="font-sans text-sm">{allProducts[0].description}</p>
               <p className="mt-1 font-sans text-2xl">
-                {/* nikhil */}
-                {/* {allProducts[0].default_price?.unit_amount / 100} / 5 credits */}
-                $ 24 / 5 credits
+                ${allProducts[0].default_price?.unit_amount / 100} / 5 credits
               </p>
               <button
                 onClick={() => {
@@ -105,10 +104,7 @@ export function Pricing() {
               <h2 className="text-2xl font-semibold">{allProducts[2].name}</h2>
               <p className="font-sans text-sm">{allProducts[2].description}</p>
               <p className="mt-1 font-sans text-2xl">
-                {/* nikhil */}
-                {/* $ {allProducts[2].default_price?.unit_amount / 100} / 25 credits */}
-                {/* $ {allProducts[2].default_price?.unit_amount / 100} / 25 credits */}
-                $ 99 / 25 credits
+                ${allProducts[2].default_price?.unit_amount / 100} / 25 credits
               </p>
               <button
                 onClick={() => {
@@ -139,13 +135,11 @@ export function Pricing() {
             <h2 className="text-2xl font-semibold">{allProducts[1].name}</h2>
             <p className="font-sans text-sm">{allProducts[1].description}</p>
             <p className="mt-1 font-sans text-2xl">
-              {/* $ {allProducts[1].default_price?.unit_amount / 100} / 50 credits */}
-              $ 160 / 50 credits
+              ${allProducts[1].default_price?.unit_amount / 100} / 50 credits
             </p>
             <button
               onClick={() => {
-                // @ts-expect-error nikhil change this later
-                handleCheckout(allProducts[1].default_price.id);
+                handleCheckout(allProducts[1]?.default_price.id);
               }}
               className={`mt-8 flex w-full justify-center gap-4 rounded-xl border border-teal-500 border-transparent bg-white px-8 py-2 text-center font-bold text-black transition duration-200 hover:bg-teal-500/95 hover:text-white ${nunito_sans.className}`}
             >

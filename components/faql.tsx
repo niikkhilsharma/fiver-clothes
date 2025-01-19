@@ -7,7 +7,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { faq } from "@/lib/data";
-import { useSectionInView } from "@/lib/hooks";
+import { useSectionInView } from "@/hooks/hooks";
 
 export function FAQ() {
   const { ref } = useSectionInView("FAQ", 0.5);

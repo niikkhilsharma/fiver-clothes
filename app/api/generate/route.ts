@@ -1,9 +1,32 @@
 import { NextResponse } from "next/server";
+import prisma from "@/lib/prisma";
+import { auth } from "@/auth";
+import { reduceUserCredits } from "@/utils/db/actions";
 
 const HUHU_API_KEY = process.env.HUHU_API_KEY;
-const HUHU_API_URL = "https://api-service.huhu.ai/tryon/v1";
+const HUHU_API_URL = process.env.HUHU_API_URL!;
 
 export async function POST(request: Request) {
+  const session = await auth();
+  const user = await prisma.user.findUnique({
+    where: { email: session?.user?.email! },
+  });
+
+  if (!user) {
+    return NextResponse.json(
+      { error: "Please login to continue" },
+      { status: 401 },
+    );
+  } else if (!(user?.totalCredits > 0)) {
+    return NextResponse.json(
+      {
+        error:
+          "Insufficient credits. Please recharge your account to continue.",
+      },
+      { status: 403 },
+    );
+  }
+
   if (!HUHU_API_KEY) {
     return NextResponse.json(
       { error: "API key not configured" },
@@ -35,10 +58,12 @@ export async function POST(request: Request) {
         model_type: modelType,
       }),
     });
-    console.log(response, "response");
+
     if (!response.ok) {
       throw new Error(`Huhu API error: ${response.statusText}`);
     }
+
+    await reduceUserCredits({ email: user.email, reduceBy: 1 });
 
     const data = await response.json();
     return NextResponse.json(data);

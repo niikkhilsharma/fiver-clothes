@@ -1,0 +1,24 @@
+{
+  "product": {
+    "name": "Test Product",
+    "description": "A test product with an Indian price",
+    "active": true
+  },
+  "price": {
+    "unit_amount": 2400,
+    "currency": "inr",
+    "recurring": { "interval": "month" },
+    "product": "{{product.id}}"
+  },
+  "checkout_session": {
+    "success_url": "https://example.com/success",
+    "cancel_url": "https://example.com/cancel",
+    "mode": "subscription",
+    "line_items": [
+      {
+        "price": "{{price.id}}",
+        "quantity": 1
+      }
+    ]
+  }
+}
