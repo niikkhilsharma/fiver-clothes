@@ -6,8 +6,9 @@ import { useSectionInView } from "@/hooks/hooks";
 import { sendEmail } from "@/actions/sendEmail";
 import SubmitBtn from "./submit-btn";
 import toast from "react-hot-toast";
+import { languageDictionaryType } from "@/lib/types";
 
-export default function Contact() {
+export default function Contact(dictionary: languageDictionaryType) {
   const { ref } = useSectionInView("Contact");
 
   return (
@@ -29,15 +30,15 @@ export default function Contact() {
       }}
     >
       <h2 className="mb-8 text-center text-3xl font-medium capitalize">
-        Contact me
+        {dictionary.dictionary.contact.heading}
       </h2>
 
       <p className="-mt-6 text-gray-700">
-        Please contact me directly at
+        {dictionary.dictionary.contact.subHeading[1]}
         <a className="mx-1 underline" href="mailto:example@gmail.com">
-          example@gmail.com
+          {dictionary.dictionary.contact.subHeading[2]}
         </a>
-        or through this form.
+        {dictionary.dictionary.contact.subHeading[2]}
       </p>
 
       <form
@@ -50,7 +51,9 @@ export default function Contact() {
             return;
           }
 
-          toast.success("Email sent successfully!");
+          toast.success(
+            dictionary.dictionary.contact.toastMessages.mailSentSuccess,
+          );
         }}
       >
         <input
@@ -59,16 +62,16 @@ export default function Contact() {
           type="email"
           required
           maxLength={500}
-          placeholder="Your email"
+          placeholder={dictionary.dictionary.contact.placeHolder.input}
         />
         <textarea
           className="my-3 h-52 rounded-lg border border-black p-4 transition-all"
           name="message"
-          placeholder="Your message"
+          placeholder={dictionary.dictionary.contact.placeHolder.textarea}
           required
           maxLength={5000}
         />
-        <SubmitBtn />
+        <SubmitBtn dictionary={dictionary} />
       </form>
     </motion.section>
   );

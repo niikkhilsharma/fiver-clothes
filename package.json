@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.7.4",
+    "@formatjs/intl-localematcher": "^0.5.10",
     "@hookform/resolvers": "^3.10.0",
     "@prisma/client": "^6.2.1",
     "@prisma/extension-accelerate": "^1.2.1",
@@ -32,6 +33,7 @@
     "clsx": "^2.1.1",
     "framer-motion": "^11.15.0",
     "lucide-react": "^0.469.0",
+    "negotiator": "^1.0.0",
     "next": "15.1.3",
     "next-auth": "^5.0.0-beta.25",
     "react": "^19.0.0",
@@ -50,6 +52,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@types/negotiator": "^0.6.3",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",

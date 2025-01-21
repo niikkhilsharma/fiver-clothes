@@ -1,10 +1,11 @@
 "use client";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Image as ImageIcon } from "lucide-react";
 import Image from "next/image";
 import ImageGallery from "@/components/image-gallery";
+import { useParams } from "next/navigation";
 import ActiveSectionContextProvider from "@/context/active-section-context";
 import {
   Select,
@@ -20,9 +21,26 @@ import { useToast } from "@/hooks/use-toast";
 import Header from "@/components/header";
 import { ToastAction } from "@/components/ui/toast";
 import Link from "next/link";
+import { Locale } from "@/i18n.config";
+import { getDictionary } from "@/lib/dictionary";
+import { languageDictionaryType } from "@/lib/types";
 
 export default function Create() {
   const { toast } = useToast();
+  const params = useParams<{ lang: Locale }>();
+  const [dictionary, setDictionary] = useState<languageDictionaryType | null>(
+    null,
+  );
+
+  useEffect(() => {
+    async function getDict() {
+      const dictionary = await getDictionary(params.lang);
+      // nikhil
+      // @ts-expect-error issue setting setDictionary
+      setDictionary({ dictionary: dictionary });
+    }
+    getDict();
+  }, [params.lang]);
 
   const [garmentImgUrl, setGarmentImgUrl] = useState<string | null>(null);
   const [modelImgUrl, setModelImgUrl] = useState<string | null>(null);
@@ -209,12 +227,13 @@ export default function Create() {
     };
   }, [jobId, jobStatus]);
 
+  if (!dictionary) return;
+
   return (
     <div className="min-h-screen">
       <ActiveSectionContextProvider>
-        <Header />
+        <Header dictionary={dictionary.dictionary} />
       </ActiveSectionContextProvider>
-      {/* <div className="mx-auto flex max-w-screen-lg flex-wrap justify-center gap-2 overflow-x-hidden px-4 py-8 md:flex-nowrap lg:gap-2"> */}
       <div className="mx-auto my-32 flex max-w-screen-lg flex-wrap justify-center gap-4 px-4 md:flex-nowrap md:justify-between">
         {/* Garment Section */}
         <div className="w-full sm:w-[48%] md:w-[31%]">

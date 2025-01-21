@@ -1,0 +1,121 @@
+{
+  "metadata": {
+    "title": "Prueba Ropa Virtualmente con IA | GetPolara.ai",
+    "description": "¡Sube tu imagen y mírate usando cualquier prenda con IA! GetPolara.ai te permite visualizar cómo te quedará la ropa antes de comprarla. ¡Pruébalo ahora!",
+    "keywords": "prueba de ropa con IA, vestidor virtual, probar ropa online, armario virtual, generador de atuendos IA, probar atuendos, aplicación de moda IA",
+    "openGraph": {
+      "title": "Prueba Ropa Virtualmente con IA | GetPolara.ai",
+      "description": "¡Sube tu imagen y mírate usando cualquier prenda con IA! GetPolara.ai te permite visualizar cómo te quedará la ropa antes de comprarla. ¡Pruébalo ahora!",
+      "images": [{ "alt": "Vista previa de GetPolara AI" }]
+    },
+    "twitter": {
+      "card": "summary_large_image",
+      "title": "Prueba Ropa Virtualmente con IA | GetPolara.ai",
+      "description": "¡Sube tu imagen y mírate usando cualquier prenda con IA! GetPolara.ai te permite visualizar cómo te quedará la ropa antes de comprarla. ¡Pruébalo ahora!"
+    }
+  },
+  "header": {
+    "links": [
+      { "name": "Polara", "hash": "/", "key": "Polara" },
+      {
+        "name": "Inicio",
+        "hash": "#home",
+        "key": "Home"
+      },
+      {
+        "name": "Demostración",
+        "hash": "#demo",
+        "key": "Demo"
+      },
+      {
+        "name": "Precios",
+        "hash": "#pricing",
+        "key": "Pricing"
+      },
+      {
+        "name": "Contacto",
+        "hash": "#contact",
+        "key": "Contact"
+      }
+    ]
+  },
+  "hero": {
+    "title": "Modelos Generados por IA: Revolucionando la Forma en que Exhibes Ropa",
+    "description": "Genera modelos de IA vistiendo tus productos usando solo una imagen de prenda plana y aumenta tus ventas.",
+    "try_now": "Pruébalo Ahora"
+  },
+  "demo": { "heading": "Características que Transforman tus Imágenes de Moda" },
+  "pricing": {
+    "heading": "Comienza con Polara",
+    "product_1": {
+      "1": "Obtén créditos para probar Polara con tu propia ropa",
+      "2": "Paga a medida que lo necesites comprando los créditos de generación que necesites"
+    },
+    "product_2": {
+      "1": "Generaciones mensuales",
+      "2": "Acceso anticipado a nuevas funciones",
+      "3": "Soporte prioritario"
+    },
+    "product_3": {
+      "1": "Generaciones mensuales o anuales personalizadas",
+      "2": "Procesamiento nocturno por lotes de cientos de prendas",
+      "3": "Infraestructura informática dedicada"
+    }
+  },
+  "faq": {
+    "heading": "Preguntas Frecuentes",
+    "questions": [
+      {
+        "question": "¿Cómo puedo generar imágenes de ropa para mis marcas de moda?",
+        "answer": "Polara te permite subir fotos de prendas planas y luego generar fotos de IA de modelos vistiendo la ropa simplemente describiéndolas."
+      },
+      {
+        "question": "¿Qué tipo de fotos debo subir para generar mis imágenes de ropa?",
+        "answer": "Las fotos de ropa colocadas planas o en maniquí funcionan mejor. También puedes usar imágenes de la prenda ya usada por alguien, pero debes recortar la imagen alrededor de la prenda para ayudar a que la IA se enfoque en ella."
+      },
+      {
+        "question": "¿Polara mantendrá los patrones y estampados de mis prendas?",
+        "answer": "Los estampados y patrones son difíciles de mantener consistentes en todas las generaciones. Dependiendo de la complejidad de la prenda, es posible que debas generar varias fotos antes de obtener una satisfactoria."
+      },
+      {
+        "question": "¿Puedo usar Polara para probarme ropa personalmente?",
+        "answer": "¡Por el momento no! La herramienta está pensada para marcas como alternativa a las sesiones de fotos."
+      },
+      {
+        "question": "¿Las fotos de IA tendrán defectos?",
+        "answer": "A veces sí. Siempre existirá la probabilidad de generar aberraciones como un brazo extra, ojos deformes, etc. Actualmente, alrededor del 80% de las fotos que generes serán de buena calidad y estamos trabajando constantemente para mejorar estas probabilidades."
+      },
+      {
+        "question": "¿Cuánto cuesta Polara?",
+        "answer": "Nuestros precios comienzan en $0.5 USD por foto generada. Puedes comprar créditos según los necesites o suscribirte a un plan para créditos mensuales. Cuanto mayor sea la suscripción, menor será el costo por crédito. Las suscripciones nos ayudan a prever mejor los costos de computación para ejecutar nuestros modelos de IA y así ofrecer los precios más competitivos posibles."
+      },
+      {
+        "question": "¿Puedo obtener un reembolso si no estoy satisfecho con el resultado?",
+        "answer": "Desafortunadamente, no podemos ofrecer reembolsos ya que los costos incurridos al ejecutar modelos de IA son extremadamente altos (en comparación con el software tradicional). Cuando se genera una foto, pagamos por el tiempo de procesamiento usado por la GPU, independientemente de la calidad de la foto y no podemos pedir un reembolso nosotros mismos. Durante el registro, aceptas renunciar a tu derecho a reembolso por esta razón."
+      }
+    ]
+  },
+  "contact": {
+    "heading": "Contáctame",
+    "subHeading": {
+      "1": "Por favor, contáctame directamente en",
+      "2": "example@gmail.com",
+      "3": "o a través de este formulario."
+    },
+    "toastMessages": {
+      "mailSentSuccess": "¡Correo enviado con éxito!"
+    },
+    "placeHolder": {
+      "input": "Tu correo",
+      "textarea": "Tu mensaje"
+    },
+    "submitBtn": "Enviar"
+  },
+  "footer": {
+    "allRightReserved": "2030 Polara. Todos los derechos reservados.",
+    "subHeading": {
+      "1": "Acerca de este sitio web:",
+      "2": "construido con React & Next.js (App Router & Server Actions), TypeScript, Tailwind CSS, Framer Motion, React Email & Resend, hosting en Vercel."
+    }
+  }
+}

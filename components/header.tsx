@@ -3,20 +3,22 @@
 import { Merriweather } from "next/font/google";
 import React from "react";
 import { motion } from "framer-motion";
-import { links } from "@/lib/data";
 import Link from "next/link";
 import clsx from "clsx";
 import { useActiveSectionContext } from "@/context/active-section-context";
 import { cn } from "@/lib/utils";
+import { languageDictionaryType } from "@/lib/types";
 
 const merriweather = Merriweather({
   weight: ["400"],
   subsets: ["latin"],
 });
 
-export default function Header() {
+export default function Header(dictionary: languageDictionaryType) {
   const { activeSection, setActiveSection, setTimeOfLastClick } =
     useActiveSectionContext();
+
+  const links = dictionary.dictionary.header.links;
 
   return (
     <header className="relative z-[999]">
@@ -42,18 +44,18 @@ export default function Header() {
                   "flex w-full items-center justify-center px-3 py-3 transition hover:text-gray-950 dark:text-gray-500 dark:hover:text-gray-300",
                   {
                     "text-gray-950 dark:text-gray-200":
-                      activeSection === link.name,
+                      activeSection === link.key,
                   },
                 )}
                 href={link.hash}
                 onClick={() => {
-                  setActiveSection(link.name);
+                  setActiveSection(link.key);
                   setTimeOfLastClick(Date.now());
                 }}
               >
                 {link.name}
 
-                {link.name === activeSection && (
+                {link.key === activeSection && (
                   <motion.span
                     className="absolute inset-0 -z-10 rounded-full bg-gray-100 dark:bg-gray-800"
                     layoutId="activeSection"

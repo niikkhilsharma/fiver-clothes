@@ -6,19 +6,21 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { faq } from "@/lib/data";
 import { useSectionInView } from "@/hooks/hooks";
+import { languageDictionaryType } from "@/lib/types";
 
-export function FAQ() {
+export function FAQ(dictionary: languageDictionaryType) {
   const { ref } = useSectionInView("FAQ", 0.5);
+
+  const faqs = dictionary.dictionary.faq.questions;
 
   return (
     <div className="mx-auto max-w-screen-lg" ref={ref} id="faq">
       <h2 className="my-10 flex items-center justify-center text-center text-3xl font-bold sm:text-start sm:text-2xl md:text-3xl lg:text-4xl">
-        Frequently Asked Questions
+        {dictionary.dictionary.faq.heading}
       </h2>
       <Accordion type="single" collapsible className="space-y-4">
-        {faq.map((item, i) => (
+        {faqs.map((item: { question: string; answer: string }, i: number) => (
           <AccordionItem
             key={i}
             value={`item-${i + 1}`}

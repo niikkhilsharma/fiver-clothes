@@ -6,8 +6,9 @@ import Image from "next/image";
 import Link from "next/link";
 import Balancer from "react-wrap-balancer";
 import { useSession, signIn } from "next-auth/react";
+import { languageDictionaryType } from "@/lib/types";
 
-export default function Hero() {
+export default function Hero(dictionary: languageDictionaryType) {
   const { ref } = useSectionInView("Home", 0.5);
   const session = useSession();
 
@@ -19,11 +20,10 @@ export default function Hero() {
     >
       <div className="w-full font-comfortaa sm:flex sm:w-1/2 sm:flex-col sm:justify-center">
         <Balancer className="text-center text-3xl font-bold sm:text-start sm:text-2xl md:text-3xl lg:text-4xl">
-          AI-Generated Fashion Models: Revolutionizing How You Showcase Apparel
+          {dictionary.dictionary.hero.title}
         </Balancer>
         <Balancer className="my-6 text-center text-lg font-semibold sm:text-start sm:text-base lg:text-xl">
-          Generate AI models wearing your products using only one flat-lay image
-          and drive more sales.
+          {dictionary.dictionary.hero.description}
         </Balancer>
 
         <div className="mb-10 mt-2 flex justify-center sm:mb-0 sm:justify-start">
@@ -33,7 +33,7 @@ export default function Hero() {
                 href={"/create"}
                 className="flex h-full w-full items-center justify-center gap-4"
               >
-                Try Now <ArrowRight />
+                {dictionary.dictionary.hero.try_now} <ArrowRight />
               </Link>
             </button>
           ) : (
@@ -43,7 +43,7 @@ export default function Hero() {
                 signIn("google");
               }}
             >
-              Try Now <ArrowRight />
+              {dictionary.dictionary.hero.try_now} <ArrowRight />
             </button>
           )}
         </div>
