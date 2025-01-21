@@ -40,10 +40,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-  params,
 }: Readonly<{
   children: React.ReactNode;
-  params: { lang: Locale };
 }>) {
   return (
     <html lang="en">

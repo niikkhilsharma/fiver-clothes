@@ -8,7 +8,7 @@ import ActiveSectionContextProvider from "@/context/active-section-context";
 export default async function CreatePage({
   params,
 }: {
-  params: { lang: Locale };
+  params: Promise<{ lang: Locale }>;
 }) {
   const param = await params;
   const dictionary = (await getDictionary(

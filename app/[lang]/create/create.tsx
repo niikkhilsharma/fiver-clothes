@@ -19,26 +19,9 @@ import { uploadToCloudinary } from "@/lib/function";
 import { useToast } from "@/hooks/use-toast";
 import { ToastAction } from "@/components/ui/toast";
 import Link from "next/link";
-import { Locale } from "@/i18n.config";
-import { getDictionary } from "@/lib/dictionary";
-import { languageDictionaryType } from "@/lib/types";
 
 export default function Create() {
   const { toast } = useToast();
-  const params = useParams<{ lang: Locale }>();
-  const [dictionary, setDictionary] = useState<languageDictionaryType | null>(
-    null,
-  );
-
-  useEffect(() => {
-    async function getDict() {
-      const dictionary = await getDictionary(params.lang);
-      // nikhil
-      // @ts-expect-error issue setting setDictionary
-      setDictionary({ dictionary: dictionary });
-    }
-    getDict();
-  }, [params.lang]);
 
   const [garmentImgUrl, setGarmentImgUrl] = useState<string | null>(null);
   const [modelImgUrl, setModelImgUrl] = useState<string | null>(null);
@@ -224,8 +207,6 @@ export default function Create() {
       }
     };
   }, [jobId, jobStatus]);
-
-  if (!dictionary) return;
 
   return (
     <div className="mx-auto my-32 flex max-w-screen-lg flex-wrap justify-center gap-4 px-4 md:flex-nowrap md:justify-between">

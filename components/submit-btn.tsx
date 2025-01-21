@@ -7,7 +7,7 @@ export default function SubmitBtn(dictionary: {
   dictionary: languageDictionaryType;
 }) {
   const { pending } = useFormStatus();
-  const dict = dictionary.dictionary.dictionary;
+  const dict = dictionary.dictionary;
 
   return (
     <button
@@ -16,7 +16,7 @@ export default function SubmitBtn(dictionary: {
       disabled={pending}
     >
       {pending ? (
-        <div className="h-5 w-5 animate-spin rounded-full border-b-2 border-white"></div>
+        <div className="h-5 w-5 animate-spin rounded-full border-b-2 border-white" />
       ) : (
         <>
           {dict.contact.submitBtn}
