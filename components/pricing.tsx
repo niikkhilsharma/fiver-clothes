@@ -17,7 +17,11 @@ const nunito_sans = Nunito_Sans({
   display: "swap",
 });
 
-export function Pricing(dictionary: languageDictionaryType) {
+export function Pricing({
+  dictionary,
+}: {
+  dictionary: languageDictionaryType;
+}) {
   const { toast } = useToast();
   // nikhil
   const [allProducts, setAllProducts] = useState<Stripe.Product[]>([]);
@@ -109,7 +113,7 @@ export function Pricing(dictionary: languageDictionaryType) {
       ref={ref}
     >
       <h2 className="my-10 flex items-center justify-center text-center text-3xl font-bold sm:text-start sm:text-2xl md:text-3xl lg:text-4xl">
-        {dictionary.dictionary.pricing.heading}
+        {dictionary.pricing.heading}
       </h2>
       {allProducts && (
         <>
@@ -133,11 +137,11 @@ export function Pricing(dictionary: languageDictionaryType) {
               <div className="mt-10 text-sm">
                 <p className="flex items-center gap-2">
                   <Check size={26} className="mr-1" />
-                  {dictionary.dictionary.pricing.product_1[1]}
+                  {dictionary.pricing.product_1[1]}
                 </p>
                 <p className="mt-4 flex items-center gap-2">
                   <Check size={34} className="mr-1" />
-                  {dictionary.dictionary.pricing.product_1[2]}
+                  {dictionary.pricing.product_1[2]}
                 </p>
               </div>
             </div>
@@ -160,15 +164,15 @@ export function Pricing(dictionary: languageDictionaryType) {
               <div className="mt-10 text-sm">
                 <p className="flex items-center gap-2">
                   <Check size={22} className="mr-1" />
-                  {dictionary.dictionary.pricing.product_2[1]}
+                  {dictionary.pricing.product_2[1]}
                 </p>
                 <p className="mt-4 flex items-center gap-2">
                   <Check size={22} className="mr-1" />
-                  {dictionary.dictionary.pricing.product_2[2]}
+                  {dictionary.pricing.product_2[2]}
                 </p>
                 <p className="mt-4 flex items-center gap-2">
                   <Check size={22} className="mr-1" />
-                  {dictionary.dictionary.pricing.product_2[3]}
+                  {dictionary.pricing.product_2[3]}
                 </p>
               </div>
             </div>
@@ -192,15 +196,15 @@ export function Pricing(dictionary: languageDictionaryType) {
             <div className="mt-10 text-sm">
               <p className="flex items-center gap-2">
                 <Check size={22} className="mr-1" />
-                {dictionary.dictionary.pricing.product_3[1]}
+                {dictionary.pricing.product_3[1]}
               </p>
               <p className="mt-4 flex items-center gap-2">
                 <Check size={22} className="mr-1" />
-                {dictionary.dictionary.pricing.product_3[2]}
+                {dictionary.pricing.product_3[2]}
               </p>
               <p className="mt-4 flex items-center gap-2">
                 <Check size={22} className="mr-1" />
-                {dictionary.dictionary.pricing.product_3[3]}
+                {dictionary.pricing.product_3[3]}
               </p>
             </div>
           </div>

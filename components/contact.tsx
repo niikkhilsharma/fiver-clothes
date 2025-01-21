@@ -8,7 +8,11 @@ import SubmitBtn from "./submit-btn";
 import toast from "react-hot-toast";
 import { languageDictionaryType } from "@/lib/types";
 
-export default function Contact(dictionary: languageDictionaryType) {
+export default function Contact({
+  dictionary,
+}: {
+  dictionary: languageDictionaryType;
+}) {
   const { ref } = useSectionInView("Contact");
 
   return (
@@ -30,15 +34,15 @@ export default function Contact(dictionary: languageDictionaryType) {
       }}
     >
       <h2 className="mb-8 text-center text-3xl font-medium capitalize">
-        {dictionary.dictionary.contact.heading}
+        {dictionary.contact.heading}
       </h2>
 
       <p className="-mt-6 text-gray-700">
-        {dictionary.dictionary.contact.subHeading[1]}
+        {dictionary.contact.subHeading[1]}
         <a className="mx-1 underline" href="mailto:example@gmail.com">
-          {dictionary.dictionary.contact.subHeading[2]}
+          {dictionary.contact.subHeading[2]}
         </a>
-        {dictionary.dictionary.contact.subHeading[2]}
+        {dictionary.contact.subHeading[2]}
       </p>
 
       <form
@@ -51,9 +55,7 @@ export default function Contact(dictionary: languageDictionaryType) {
             return;
           }
 
-          toast.success(
-            dictionary.dictionary.contact.toastMessages.mailSentSuccess,
-          );
+          toast.success(dictionary.contact.toastMessages.mailSentSuccess);
         }}
       >
         <input
@@ -62,12 +64,12 @@ export default function Contact(dictionary: languageDictionaryType) {
           type="email"
           required
           maxLength={500}
-          placeholder={dictionary.dictionary.contact.placeHolder.input}
+          placeholder={dictionary.contact.placeHolder.input}
         />
         <textarea
           className="my-3 h-52 rounded-lg border border-black p-4 transition-all"
           name="message"
-          placeholder={dictionary.dictionary.contact.placeHolder.textarea}
+          placeholder={dictionary.contact.placeHolder.textarea}
           required
           maxLength={5000}
         />

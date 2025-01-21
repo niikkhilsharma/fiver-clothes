@@ -9,10 +9,13 @@ import SectionDivider from "@/components/section-divider";
 import Footer from "@/components/footer";
 import { getDictionary } from "@/lib/dictionary";
 import { Locale } from "@/i18n.config";
+import { languageDictionaryType } from "@/lib/types";
 
 export default async function Home({ params }: { params: { lang: Locale } }) {
   const param = await params;
-  const dictionary = await getDictionary(param.lang);
+  const dictionary = (await getDictionary(
+    param.lang,
+  )) as languageDictionaryType;
 
   return (
     <div className="px-4 pt-28 sm:pt-36">
@@ -25,7 +28,6 @@ export default async function Home({ params }: { params: { lang: Locale } }) {
         <Pricing dictionary={dictionary} />
         <SectionDivider />
         <FAQ dictionary={dictionary} />
-        {/* <SectionDivider /> */}
         <Contact dictionary={dictionary} />
         <Footer dictionary={dictionary} />
       </ActiveSectionContextProvider>

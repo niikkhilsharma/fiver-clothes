@@ -4,14 +4,14 @@ import { useSectionInView } from "@/hooks/hooks";
 import { Compare } from "./ui/compare";
 import { languageDictionaryType } from "@/lib/types";
 
-export function Demo(dictionary: languageDictionaryType) {
+export function Demo({ dictionary }: { dictionary: languageDictionaryType }) {
   const { ref } = useSectionInView("Demo", 0.5);
 
   return (
     <div ref={ref} id="demo">
       <div className="mx-auto max-w-screen-lg">
         <h2 className="my-10 flex items-center justify-center text-center text-3xl font-bold sm:text-start sm:text-2xl md:text-3xl lg:text-4xl">
-          {dictionary.dictionary.demo.heading}
+          {dictionary.demo.heading}
         </h2>
         <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
           <Compare

@@ -14,11 +14,15 @@ const merriweather = Merriweather({
   subsets: ["latin"],
 });
 
-export default function Header(dictionary: languageDictionaryType) {
+export default function Header({
+  dictionary,
+}: {
+  dictionary: languageDictionaryType;
+}) {
   const { activeSection, setActiveSection, setTimeOfLastClick } =
     useActiveSectionContext();
-
-  const links = dictionary.dictionary.header.links;
+  console.log(dictionary);
+  const links = dictionary.header.links;
 
   return (
     <header className="relative z-[999]">

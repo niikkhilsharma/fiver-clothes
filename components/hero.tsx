@@ -8,7 +8,11 @@ import Balancer from "react-wrap-balancer";
 import { useSession, signIn } from "next-auth/react";
 import { languageDictionaryType } from "@/lib/types";
 
-export default function Hero(dictionary: languageDictionaryType) {
+export default function Hero({
+  dictionary,
+}: {
+  dictionary: languageDictionaryType;
+}) {
   const { ref } = useSectionInView("Home", 0.5);
   const session = useSession();
 
@@ -20,10 +24,10 @@ export default function Hero(dictionary: languageDictionaryType) {
     >
       <div className="w-full font-comfortaa sm:flex sm:w-1/2 sm:flex-col sm:justify-center">
         <Balancer className="text-center text-3xl font-bold sm:text-start sm:text-2xl md:text-3xl lg:text-4xl">
-          {dictionary.dictionary.hero.title}
+          {dictionary.hero.title}
         </Balancer>
         <Balancer className="my-6 text-center text-lg font-semibold sm:text-start sm:text-base lg:text-xl">
-          {dictionary.dictionary.hero.description}
+          {dictionary.hero.description}
         </Balancer>
 
         <div className="mb-10 mt-2 flex justify-center sm:mb-0 sm:justify-start">
@@ -33,7 +37,7 @@ export default function Hero(dictionary: languageDictionaryType) {
                 href={"/create"}
                 className="flex h-full w-full items-center justify-center gap-4"
               >
-                {dictionary.dictionary.hero.try_now} <ArrowRight />
+                {dictionary.hero.try_now} <ArrowRight />
               </Link>
             </button>
           ) : (
@@ -43,7 +47,7 @@ export default function Hero(dictionary: languageDictionaryType) {
                 signIn("google");
               }}
             >
-              {dictionary.dictionary.hero.try_now} <ArrowRight />
+              {dictionary.hero.try_now} <ArrowRight />
             </button>
           )}
         </div>
