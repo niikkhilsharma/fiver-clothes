@@ -24,6 +24,9 @@ export async function uploadToCloudinary(file: File) {
   }
 
   const data = await response.json();
+  console.log(
+    `https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/${data.publicId}`,
+  );
   return `https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/${data.publicId}`;
 }
 

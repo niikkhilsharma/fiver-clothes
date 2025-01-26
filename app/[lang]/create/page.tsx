@@ -20,7 +20,7 @@ export default async function CreatePage({
       <ActiveSectionContextProvider>
         <Header dictionary={dictionary} />
       </ActiveSectionContextProvider>
-      <Create />
+      <Create dictionary={dictionary} />
     </div>
   );
 }

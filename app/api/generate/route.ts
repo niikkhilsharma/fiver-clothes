@@ -68,7 +68,7 @@ export async function POST(request: Request) {
     const data = await response.json();
     return NextResponse.json(data);
   } catch (error) {
-    console.error("Generate error:", error);
+    console.log("Generate error:", error);
     return NextResponse.json(
       { error: "Failed to generate image" },
       { status: 500 },

@@ -1,11 +1,11 @@
 "use client";
 import { useEffect, useState } from "react";
-import { Skeleton } from "@/components/ui/skeleton";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Image as ImageIcon } from "lucide-react";
 import Image from "next/image";
 import ImageGallery from "@/components/image-gallery";
+import { useParams } from "next/navigation";
 import {
   Select,
   SelectContent,
@@ -17,31 +17,25 @@ import { Button } from "@/components/ui/button";
 import { modelImages, garmentImages } from "@/lib/data";
 import { uploadToCloudinary } from "@/lib/function";
 import { useToast } from "@/hooks/use-toast";
-import { languageDictionaryType } from "@/lib/types";
+import { ToastAction } from "@/components/ui/toast";
+import Link from "next/link";
 
-export default function Create({
-  dictionary,
-}: {
-  dictionary: languageDictionaryType;
-}) {
+export default function Create() {
   const { toast } = useToast();
 
   const [garmentImgUrl, setGarmentImgUrl] = useState<string | null>(null);
-  const [replicateImageUrl, setReplicateImageUrl] = useState<string | null>(
-    null,
-  );
-  const [currentModelImageUrl, setCurrentModelImageUrl] = useState<
-    string | null
-  >(null);
+  const [modelImgUrl, setModelImgUrl] = useState<string | null>(null);
+  const [genImageUrl, setGenImage] = useState<string | null>(null);
   const [garmentType, setGarmentType] = useState<string | null>(null);
-  const [prompt, setPrompt] = useState<string>("");
-  const [cameraAngle, setCameraAngle] = useState<string>("front");
 
   const [isLoading, setIsLoading] = useState(false);
+  const [numImages, setNumImages] = useState("1");
+
   const [jobStatus, setJobStatus] = useState<string | null>(null);
   const [jobId, setJobId] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
+  // Handle file uploads
   const handleFileUpload = async (
     file: File,
     setUrl: (url: string) => void,
@@ -50,10 +44,6 @@ export default function Create({
       setIsLoading(true);
       const cloudinaryUrl = await uploadToCloudinary(file);
       setUrl(cloudinaryUrl);
-      toast({
-        title: "Upload Successful",
-        description: "Image uploaded successfully.",
-      });
     } catch (error) {
       console.error("Upload error:", error);
       toast({
@@ -66,6 +56,7 @@ export default function Create({
     }
   };
 
+  // Validate inputs before generation
   const validateInputs = (): boolean => {
     if (!garmentType) {
       toast({
@@ -83,71 +74,25 @@ export default function Create({
       });
       return false;
     }
-    if (!prompt.trim()) {
+    if (!modelImgUrl) {
       toast({
         variant: "destructive",
         title: "Missing Input",
-        description: "Please enter a description prompt.",
+        description: "Please upload the model image.",
       });
       return false;
     }
     return true;
   };
 
-  const handleReplicateGenerate = async () => {
+  // Handle generate button click
+  const handleGenerate = async () => {
     if (!validateInputs()) return;
+    let payNow = false;
 
     try {
       setIsLoading(true);
       setError(null);
-      setReplicateImageUrl(null);
-
-      const response = await fetch("/api/replicate-generate", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          garmentType,
-          garmentImgUrl,
-          prompt,
-          cameraAngle,
-        }),
-      });
-
-      if (!response.ok) {
-        const errorMessage =
-          (await response.json()).error || "Generation Failed";
-        throw new Error(errorMessage);
-      }
-
-      const data = await response.json();
-      setReplicateImageUrl(data.imageUrl);
-      setIsLoading(false);
-      toast({
-        title: "Success",
-        description: "Replicate image generated successfully!",
-      });
-    } catch (error) {
-      const errorMessage =
-        error instanceof Error ? error.message : "Generation failed";
-
-      toast({
-        variant: "destructive",
-        title: "Generation Failed",
-        description: errorMessage,
-      });
-
-      setError(errorMessage);
-      setIsLoading(false);
-    }
-  };
-
-  const handleCurrentModelGenerate = async () => {
-    try {
-      setIsLoading(true);
-      setError(null);
-      setCurrentModelImageUrl(null);
 
       const response = await fetch("/api/generate", {
         method: "POST",
@@ -157,11 +102,16 @@ export default function Create({
         body: JSON.stringify({
           garmentType,
           garmentImgUrl,
-          modelImgUrl: replicateImageUrl,
+          modelImgUrl,
+          numImages: parseInt(numImages),
         }),
       });
 
       if (!response.ok) {
+        console.log(response);
+        console.log(response.status, typeof response.status);
+
+        if (response.status == 403) payNow = true;
         const errorMessage =
           (await response.json()).error || "Generation Failed";
         throw new Error(errorMessage);
@@ -173,12 +123,26 @@ export default function Create({
     } catch (error) {
       const errorMessage =
         error instanceof Error ? error.message : "Generation failed";
+      console.log(error);
 
-      toast({
-        variant: "destructive",
-        title: "Generation Failed",
-        description: errorMessage,
-      });
+      if (payNow) {
+        toast({
+          title: "Generation Failed",
+          description: errorMessage,
+          action: (
+            <ToastAction altText="Try again">
+              <Link href={"/#pricing"}>Pay Now</Link>
+            </ToastAction>
+          ),
+          variant: "destructive",
+        });
+      } else {
+        toast({
+          variant: "destructive",
+          title: "Generation Failed",
+          description: errorMessage,
+        });
+      }
 
       setError(errorMessage);
       setIsLoading(false);
@@ -202,12 +166,12 @@ export default function Create({
         setJobStatus(data.status);
 
         if (data.status === "completed" && data.imageUrl) {
-          setCurrentModelImageUrl(data.imageUrl);
+          setGenImage(data.imageUrl);
           clearInterval(intervalId);
           setIsLoading(false);
           toast({
             title: "Success",
-            description: "Current model image generated successfully!",
+            description: "Image generated successfully!",
           });
         } else if (data.status === "failed") {
           setIsLoading(false);
@@ -242,11 +206,11 @@ export default function Create({
         clearInterval(intervalId);
       }
     };
-  }, [jobId, jobStatus, toast]);
+  }, [jobId, jobStatus]);
 
   return (
     <div className="mx-auto my-32 flex max-w-screen-lg flex-wrap justify-center gap-4 px-4 md:flex-nowrap md:justify-between">
-      {/* Garment Upload Section */}
+      {/* Garment Section */}
       <div className="w-full sm:w-[48%] md:w-[31%]">
         <p className="font-sans font-medium md:h-12 lg:h-auto">
           Please upload or select a garment:
@@ -286,8 +250,6 @@ export default function Create({
           className="hidden"
         />
 
-        <ImageGallery images={garmentImages} setImgUrl={setGarmentImgUrl} />
-
         <Label htmlFor="garment_type" className="mt-2 hover:cursor-pointer">
           <Select onValueChange={(value) => setGarmentType(value)}>
             <SelectTrigger className="mt-4 w-full font-sans focus:ring-gray-300">
@@ -303,122 +265,129 @@ export default function Create({
             </SelectContent>
           </Select>
         </Label>
+
+        <ImageGallery images={garmentImages} setImgUrl={setGarmentImgUrl} />
       </div>
 
-      {/* Replicate Generated Image Section */}
+      {/* Model Section */}
+      <div className="w-full sm:w-[48%] md:w-[31%]">
+        <p className="font-sans font-medium md:h-12 lg:h-auto">
+          Please upload or select a model:
+        </p>
+        <Label htmlFor="model" className="mt-2 hover:cursor-pointer">
+          <div className="mt-2 flex h-[26rem] flex-col items-center justify-center gap-2 rounded-lg border bg-white font-sans font-bold dark:bg-gray-900/80">
+            {modelImgUrl ? (
+              <Image
+                unoptimized
+                width={100}
+                height={100}
+                alt="Model"
+                src={modelImgUrl}
+                className="h-full w-full object-contain"
+              />
+            ) : (
+              <div className="flex flex-col items-center justify-center gap-2 p-2 text-xs">
+                <ImageIcon />
+                <p className="text-center">
+                  Input Model will be displayed here.
+                </p>
+              </div>
+            )}
+          </div>
+        </Label>
+        <Input
+          type="file"
+          accept="image/*"
+          onChange={(e) => {
+            const file = e.target.files?.[0];
+            if (file) {
+              handleFileUpload(file, setModelImgUrl);
+            }
+          }}
+          id="model"
+          className="hidden"
+        />
+
+        <div className="mt-16">
+          <ImageGallery images={modelImages} setImgUrl={setModelImgUrl} />
+        </div>
+      </div>
+
+      {/* Generated Image Section */}
       <div className="w-full sm:max-w-80 md:w-[31%]">
         <p className="font-sans font-medium md:h-12 lg:h-auto">
-          Replicate Generated Image:
+          Generated image:
         </p>
 
         <div className="mt-2 flex h-[26rem] flex-col items-center justify-center gap-2 rounded-lg border bg-white font-sans font-bold dark:bg-gray-900/80">
-          {isLoading ? (
-            <Skeleton className="h-full w-full" />
-          ) : replicateImageUrl ? (
+          {genImageUrl ? (
             <Image
               unoptimized
               width={100}
               height={100}
-              alt="Replicate Generated Image"
-              src={replicateImageUrl}
+              alt="Generated Image"
+              src={genImageUrl}
               className="h-full w-full object-contain"
             />
           ) : (
             <div className="flex flex-col items-center justify-center gap-2 p-2 text-xs">
               <ImageIcon />
               <p className="text-center">
-                Replicate generated image will be displayed here.
+                Generated image will be displayed here.
               </p>
             </div>
           )}
         </div>
 
-        <div className="">
-          <ImageGallery images={modelImages} setImgUrl={setReplicateImageUrl} />
-        </div>
-
-        <div className="mt-4">
-          <Label htmlFor="prompt" className="mb-2 block">
-            Description Prompt:
-          </Label>
-          <Input
-            type="text"
-            id="prompt"
-            value={prompt}
-            onChange={(e) => setPrompt(e.target.value)}
-            placeholder="Enter image description"
-            className="w-full"
-          />
-        </div>
-
-        <div className="mt-4">
-          <Label htmlFor="camera_angle" className="mb-2 block">
-            Camera Angle:
-          </Label>
-          <Select
-            value={cameraAngle}
-            onValueChange={(value) => setCameraAngle(value)}
+        {/* <div className="mt-4 flex items-center gap-2">
+            <Label
+              htmlFor="num_images"
+              className="w-full font-sans text-sm hover:cursor-pointer"
+            >
+              Number of images:
+            </Label>
+            <Select
+              defaultValue="1"
+              onValueChange={(value) => setNumImages(value)}
+            >
+              <SelectTrigger className="font-sans focus:ring-gray-300">
+                <SelectValue className="md:w-[31%]" />
+              </SelectTrigger>
+              <SelectContent className="font-sans">
+                <SelectItem value="1">1</SelectItem>
+                <SelectItem value="2">2</SelectItem>
+                <SelectItem value="3">3</SelectItem>
+                <SelectItem value="4">4</SelectItem>
+              </SelectContent>
+            </Select>
+          </div> */}
+        <div>
+          <Button
+            className="mt-4 w-full"
+            variant={"outline"}
+            onClick={() => {
+              if (!garmentType && !garmentImgUrl && !modelImgUrl) {
+                const message = !garmentType
+                  ? "Please select the garment type."
+                  : !garmentImgUrl
+                    ? "Please upload the garment image."
+                    : "Please upload the model image.";
+                toast({
+                  variant: "destructive",
+                  title: "Uh oh! Something went wrong.",
+                  description: message,
+                });
+                return;
+              }
+              handleGenerate();
+            }}
+            disabled={
+              isLoading || !garmentType || !garmentImgUrl || !modelImgUrl
+            }
           >
-            <SelectTrigger className="w-full font-sans focus:ring-gray-300">
-              <SelectValue placeholder="Select camera angle" />
-            </SelectTrigger>
-            <SelectContent className="font-sans">
-              <SelectItem value="front">Front</SelectItem>
-              <SelectItem value="side">Side</SelectItem>
-              <SelectItem value="back">Back</SelectItem>
-              <SelectItem value="3/4">3/4 Angle</SelectItem>
-            </SelectContent>
-          </Select>
+            {isLoading ? "Processing..." : "Generate Model"}
+          </Button>
         </div>
-
-        <Button
-          className="mt-4 w-full"
-          variant={"outline"}
-          onClick={handleReplicateGenerate}
-          disabled={isLoading || !garmentType || !garmentImgUrl || !prompt}
-        >
-          {isLoading ? "Generating..." : "Generate with Replicate"}
-        </Button>
-      </div>
-
-      {/* Current Model Generated Image Section */}
-      <div className="w-full sm:max-w-80 md:w-[31%]">
-        <p className="font-sans font-medium md:h-12 lg:h-auto">
-          Current Model Generated Image:
-        </p>
-
-        <div className="mt-2 flex h-[26rem] flex-col items-center justify-center gap-2 rounded-lg border bg-white font-sans font-bold dark:bg-gray-900/80">
-          {isLoading ? (
-            <Skeleton className="h-full w-full" />
-          ) : currentModelImageUrl ? (
-            <Image
-              unoptimized
-              width={100}
-              height={100}
-              alt="Current Model Generated Image"
-              src={currentModelImageUrl}
-              className="h-full w-full object-contain"
-            />
-          ) : (
-            <div className="flex flex-col items-center justify-center gap-2 p-2 text-xs">
-              <ImageIcon />
-              <p className="text-center">
-                Current model generated image will be displayed here.
-              </p>
-            </div>
-          )}
-        </div>
-
-        <Button
-          className="mt-4 w-full"
-          variant={"outline"}
-          onClick={handleCurrentModelGenerate}
-          disabled={
-            isLoading || !garmentType || !garmentImgUrl || !replicateImageUrl
-          }
-        >
-          {isLoading ? "Processing..." : "Generate with Current Model"}
-        </Button>
       </div>
     </div>
   );

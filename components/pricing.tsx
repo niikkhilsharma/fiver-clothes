@@ -10,6 +10,7 @@ import { languageDictionaryType } from "@/lib/types";
 import { useToast } from "@/hooks/use-toast";
 import { ToastAction } from "@radix-ui/react-toast";
 import { signIn } from "next-auth/react";
+import { motion } from "motion/react";
 
 const nunito_sans = Nunito_Sans({
   subsets: ["latin"],
@@ -118,11 +119,17 @@ export function Pricing({
       {allProducts && (
         <>
           <div className="flex flex-col gap-4 sm:flex-row">
-            <div className="rounded-2xl border border-gray-300 px-6 py-12 lg:max-w-96">
+            <motion.div
+              initial={{ x: -100 }}
+              whileInView={{ x: 0 }}
+              transition={{ ease: "easeOut", duration: 1 }}
+              viewport={{ once: true }}
+              className="rounded-2xl border border-gray-300 px-6 py-12 lg:max-w-96"
+            >
               <h2 className="text-2xl font-semibold">{allProducts[0].name}</h2>
               <p className="font-sans text-sm">{allProducts[0].description}</p>
               <p className="mt-1 font-sans text-2xl">
-                {/* @ts-expect-error nikhil change this later*/}
+                {/* @ts-expect-error nikhil change this later*/}€
                 {allProducts[0].default_price?.unit_amount / 100} / 5 credits
               </p>
               <button
@@ -144,8 +151,14 @@ export function Pricing({
                   {dictionary.pricing.product_1[2]}
                 </p>
               </div>
-            </div>
-            <div className="w-full rounded-2xl border border-gray-300 bg-[#25B1A4] px-6 py-12 text-white">
+            </motion.div>
+            <motion.div
+              initial={{ x: 100 }}
+              whileInView={{ x: 0 }}
+              transition={{ ease: "easeOut", duration: 1 }}
+              viewport={{ once: true }}
+              className="w-full rounded-2xl border border-gray-300 bg-[#25B1A4] px-6 py-12 text-white"
+            >
               <h2 className="text-2xl font-semibold">{allProducts[1].name}</h2>
               <p className="font-sans text-sm">{allProducts[1].description}</p>
               <p className="mt-1 font-sans text-2xl">
@@ -175,13 +188,19 @@ export function Pricing({
                   {dictionary.pricing.product_2[3]}
                 </p>
               </div>
-            </div>
+            </motion.div>
           </div>
-          <div className="mt-4 w-full rounded-2xl border border-gray-300 bg-[#082A2B] px-6 py-12 text-white">
+          <motion.div
+            initial={{ y: 100 }}
+            whileInView={{ y: 0 }}
+            transition={{ ease: "easeOut", duration: 1 }}
+            viewport={{ once: true }}
+            className="mt-4 w-full rounded-2xl border border-gray-300 bg-[#082A2B] px-6 py-12 text-white"
+          >
             <h2 className="text-2xl font-semibold">{allProducts[2].name}</h2>
             <p className="font-sans text-sm">{allProducts[2].description}</p>
             <p className="mt-1 font-sans text-2xl">
-              {/* @ts-expect-error nikhil change this later*/}$
+              {/* @ts-expect-error nikhil change this later*/}€
               {allProducts[2].default_price?.unit_amount / 100} / 50 credits
             </p>
             <button
@@ -207,7 +226,7 @@ export function Pricing({
                 {dictionary.pricing.product_3[3]}
               </p>
             </div>
-          </div>
+          </motion.div>
         </>
       )}
     </div>

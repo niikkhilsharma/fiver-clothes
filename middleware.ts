@@ -26,6 +26,7 @@ export default auth(async function middleware(req) {
 
   // Early return if it's an API route
   if (pathname.startsWith("/api/")) {
+    console.log("redirecting");
     return NextResponse.next();
   }
 
@@ -56,6 +57,8 @@ export default auth(async function middleware(req) {
 });
 
 export const config = {
-  matcher:
+  matcher: [
     "/((?!api/auth/*|auth|api/stripe/all-products|api/payment/webhook|assets/images|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt|api/cloudinary/image-upload|^/$).+)",
+    "/",
+  ],
 };
