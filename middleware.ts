@@ -58,7 +58,7 @@ export default auth(async function middleware(req) {
 
 export const config = {
   matcher: [
-    "/((?!api/auth/*|auth|api/stripe/all-products|api/payment/webhook|assets/images|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt|api/cloudinary/image-upload|^/$).+)",
+    "/((?!api/auth/*|auth|api/stripe/all-products|api/payment/webhook|assets/images|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt|^/$).+)",
     "/",
   ],
 };

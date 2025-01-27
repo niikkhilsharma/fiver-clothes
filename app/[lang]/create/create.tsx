@@ -41,6 +41,7 @@ export default function Create({
   const [jobStatus, setJobStatus] = useState<string | null>(null);
   const [jobId, setJobId] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [modelImageLoader, setModelImageLoader] = useState<boolean>(false);
 
   const handleFileUpload = async (
     file: File,
@@ -143,9 +144,20 @@ export default function Create({
     }
   };
 
+  const handleDownloadImage = () => {
+    if (!currentModelImageUrl) return;
+
+    const link = document.createElement("a");
+    link.href = currentModelImageUrl;
+    link.download = "generated-image.jpg";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   const handleCurrentModelGenerate = async () => {
     try {
-      setIsLoading(true);
+      setModelImageLoader(true);
       setError(null);
       setCurrentModelImageUrl(null);
 
@@ -181,7 +193,7 @@ export default function Create({
       });
 
       setError(errorMessage);
-      setIsLoading(false);
+      setModelImageLoader(false);
     }
   };
 
@@ -204,7 +216,7 @@ export default function Create({
         if (data.status === "completed" && data.imageUrl) {
           setCurrentModelImageUrl(data.imageUrl);
           clearInterval(intervalId);
-          setIsLoading(false);
+          setModelImageLoader(false);
           toast({
             title: "Success",
             description: "Current model image generated successfully!",
@@ -223,7 +235,7 @@ export default function Create({
         const errorMessage =
           err instanceof Error ? err.message : "Failed to check status";
         setError(errorMessage);
-        setIsLoading(false);
+        setModelImageLoader(false);
         clearInterval(intervalId);
         toast({
           variant: "destructive",
@@ -289,7 +301,10 @@ export default function Create({
         <ImageGallery images={garmentImages} setImgUrl={setGarmentImgUrl} />
 
         <Label htmlFor="garment_type" className="mt-2 hover:cursor-pointer">
-          <Select onValueChange={(value) => setGarmentType(value)}>
+          <Select
+            defaultValue="Top"
+            onValueChange={(value) => setGarmentType(value)}
+          >
             <SelectTrigger className="mt-4 w-full font-sans focus:ring-gray-300">
               <SelectValue
                 placeholder="Please select a garment type"
@@ -377,7 +392,7 @@ export default function Create({
           onClick={handleReplicateGenerate}
           disabled={isLoading || !garmentType || !garmentImgUrl || !prompt}
         >
-          {isLoading ? "Generating..." : "Generate with Replicate"}
+          {isLoading ? "Generating..." : "Generate Image"}
         </Button>
       </div>
 
@@ -388,7 +403,7 @@ export default function Create({
         </p>
 
         <div className="mt-2 flex h-[26rem] flex-col items-center justify-center gap-2 rounded-lg border bg-white font-sans font-bold dark:bg-gray-900/80">
-          {isLoading ? (
+          {modelImageLoader ? (
             <Skeleton className="h-full w-full" />
           ) : currentModelImageUrl ? (
             <Image
@@ -418,6 +433,13 @@ export default function Create({
           }
         >
           {isLoading ? "Processing..." : "Generate with Current Model"}
+        </Button>
+        <Button
+          className="mt-4 w-full dark:text-white"
+          onClick={handleDownloadImage}
+          disabled={currentModelImageUrl ? false : true}
+        >
+          Download Image
         </Button>
       </div>
     </div>

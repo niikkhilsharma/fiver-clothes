@@ -1,3 +1,5 @@
+import { auth } from "@/auth";
+import prisma from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 import Replicate from "replicate";
 
@@ -14,6 +16,27 @@ export async function POST(req: NextRequest) {
       return NextResponse.json(
         { error: "Missing required parameters" },
         { status: 400 },
+      );
+    }
+
+    const session = await auth();
+    const user = await prisma.user.findUnique({
+      where: { email: session?.user?.email! },
+    });
+
+    if (!user) {
+      return NextResponse.json(
+        { error: "Please login to continue" },
+        { status: 401 },
+      );
+    } else if (!(user?.totalCredits > 0)) {
+      return NextResponse.json(
+        {
+          error:
+            "Insufficient credits. Please recharge your account to continue.",
+          pay: true,
+        },
+        { status: 403 },
       );
     }
 

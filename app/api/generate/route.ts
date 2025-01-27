@@ -38,6 +38,7 @@ export async function POST(request: Request) {
     const body = await request.json();
     const { garmentType, garmentImgUrl, modelImgUrl, modelType } = body;
 
+    console.log(garmentType, garmentImgUrl, modelImgUrl, modelType);
     if (!garmentType || !garmentImgUrl || !modelImgUrl) {
       return NextResponse.json(
         { error: "Missing required fields" },
