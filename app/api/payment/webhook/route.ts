@@ -4,9 +4,7 @@ import { headers } from "next/headers";
 import { createTransaction } from "@/utils/db/actions";
 import { stripe } from "@/utils/stripe/config";
 
-const endpointSecret =
-  process.env.STRIPE_SECRET_WEBHOOK_KEY ||
-  "whsec_23cf92a8c9646031ac3d2d9d84f4db8ecd12f9da061e57d8e558919d8f3c1fd3";
+const endpointSecret = process.env.STRIPE_SECRET_WEBHOOK_KEY!;
 
 export async function POST(request: NextRequest) {
   const body = await request.text();
@@ -34,25 +32,30 @@ export async function POST(request: NextRequest) {
         created: session.created,
         currency: session.currency,
         customerDetails: session.customer_details,
-        amount: session.amount_total,
+        amount: session.amount_total!,
       };
 
+      console.log(session, "from session");
+
+      const creditAmounts: { [key: number]: number } = {
+        2400: 5,
+        9900: 25,
+        16000: 50,
+      };
       const creditsToProvide =
-        session.amount_total === 2400
-          ? 5
-          : session.amount_total === 9900
-            ? 25
-            : session.amount_total === 16000
-              ? 50
-              : 0;
+        creditAmounts[session.amount_total as number] ?? 0;
 
       try {
         await createTransaction({ transactionDetails, creditsToProvide });
         console.log("Successfully processed session:", session.id);
       } catch (error) {
-        console.error("Error processing transaction:", error);
-      }
+        console.log("Error processing transaction:", error);
 
+        return NextResponse.json(
+          { error: "Failed to process transaction" },
+          { status: 500 },
+        );
+      }
       break;
     }
 

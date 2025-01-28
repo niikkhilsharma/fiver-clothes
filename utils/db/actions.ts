@@ -7,13 +7,18 @@ export type transactionDetails = {
   created: number;
   currency: string | null;
   customerDetails: Stripe.Checkout.Session.CustomerDetails | null;
-  amount: number | null;
+  amount: number;
 };
 
 export async function getUser({ email }: { email: string }) {
-  const user = await prisma.user.findUnique({ where: { email: email } });
-  console.log(user, "from actions");
-  return user;
+  try {
+    const user = await prisma.user.findUnique({ where: { email: email } });
+    console.log(user, "from actions");
+    return user;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
 }
 
 export async function reduceUserCredits({
@@ -47,19 +52,43 @@ export async function createTransaction({
   transactionDetails: transactionDetails;
   creditsToProvide: number;
 }) {
-  const user = await getUser({ email: transactionDetails.userEmail });
-  const updatedUser = await prisma.user.update({
-    where: { email: transactionDetails.userEmail },
-    data: { totalCredits: user?.totalCredits! + 4 },
-  });
+  try {
+    console.log(transactionDetails);
+    const user = await getUser({
+      email: transactionDetails.customerDetails?.email!,
+    });
 
-  console.log(
-    updatedUser,
-    "this is the updated user after the payment is done and his credits updated",
-    "credits to update = ",
-    creditsToProvide,
-  );
+    if (!user) {
+      throw new Error(
+        `User not found with email ${transactionDetails.userEmail}`,
+      );
+    }
 
-  console.log("webhook create Transaction fun run");
-  console.log(transactionDetails);
+    console.log(user, "from 60");
+
+    const updatedUser = await prisma.user.update({
+      where: {
+        email: transactionDetails.customerDetails?.email!,
+      },
+      data: {
+        totalCredits: user.totalCredits + creditsToProvide,
+        amountPaid: user.amountPaid + transactionDetails.amount,
+      },
+    });
+
+    console.log(
+      updatedUser,
+      "this is the updated user after the payment is done and his credits updated",
+      "credits to update = ",
+      creditsToProvide,
+    );
+
+    console.log("webhook create Transaction fun run");
+    console.log(transactionDetails);
+
+    return updatedUser;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
 }
