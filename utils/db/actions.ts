@@ -64,8 +64,6 @@ export async function createTransaction({
       );
     }
 
-    console.log(user, "from 60");
-
     const updatedUser = await prisma.user.update({
       where: {
         email: transactionDetails.customerDetails?.email!,
@@ -76,14 +74,8 @@ export async function createTransaction({
       },
     });
 
-    console.log(
-      updatedUser,
-      "this is the updated user after the payment is done and his credits updated",
-      "credits to update = ",
-      creditsToProvide,
-    );
-
-    console.log("webhook create Transaction fun run");
+    console.log(updatedUser, creditsToProvide);
+    console.log("Transaction created.");
     console.log(transactionDetails);
 
     return updatedUser;
