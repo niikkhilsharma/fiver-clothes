@@ -106,11 +106,21 @@ export type languageDictionaryType = {
     pleaseEnterPrompt: string;
     failedGeneration: string;
     statusCheck: string;
+    wentWrong: string;
+    loginBtn: string;
+    reload: string;
   };
   success: {
     title: string;
     imageGenerated: string;
     upload: string;
     uploadDescription: string;
+  };
+  message: {
+    signIn: string;
+    loginFirst: string;
+    tryAgain: string;
+    reload: string;
+    credits: string;
   };
 };

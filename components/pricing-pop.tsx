@@ -23,7 +23,6 @@ export default function PricingPopUp({
   dictionary: languageDictionaryType;
 }) {
   const { toast } = useToast();
-  // nikhil
   const [allProducts, setAllProducts] = useState<Stripe.Product[]>([]);
 
   const handleCheckout = async (priceId: string) => {
@@ -48,11 +47,11 @@ export default function PricingPopUp({
           title:
             response.status === 401
               ? "Please login first"
-              : "Something went wrong",
+              : dictionary.errors.wentWrong,
           description:
             response.status === 401
-              ? "Press the button below to login"
-              : "Kindly reload the page.",
+              ? dictionary.errors.loginBtn
+              : dictionary.errors.reload,
           action:
             response.status === 401 ? (
               <ToastAction
@@ -62,24 +61,23 @@ export default function PricingPopUp({
                   signIn("google");
                 }}
               >
-                Sign In
+                {dictionary.message.signIn}
               </ToastAction>
             ) : (
               <ToastAction
                 className="rounded-md border border-white/40 px-3 py-1"
                 altText="Reload"
               >
-                Reload
+                {dictionary.errors.loginBtn.split(" ")[1]}
               </ToastAction>
             ),
         };
         toast({
           title: error.title,
-          description: error.description,
           variant: "destructive",
           action: error.action,
         });
-        throw new Error("Something went wrong");
+        throw new Error(dictionary.errors.wentWrong);
       }
 
       const { sessionId } = await response.json();
@@ -95,7 +93,6 @@ export default function PricingPopUp({
     const fetchProducts = async () => {
       try {
         const activeProducts = await getAllActiveProductsWithPrice();
-        console.log(activeProducts, activeProducts?.length);
         setAllProducts(activeProducts);
       } catch (error) {
         console.error("Error fetching products:", error);

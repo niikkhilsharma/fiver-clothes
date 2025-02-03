@@ -24,7 +24,6 @@ export function Pricing({
   dictionary: languageDictionaryType;
 }) {
   const { toast } = useToast();
-  // nikhil
   const [allProducts, setAllProducts] = useState<Stripe.Product[]>([]);
   const { ref } = useSectionInView("Pricing", 0.5);
 
@@ -49,29 +48,29 @@ export function Pricing({
         const error = {
           title:
             response.status === 401
-              ? "Please login first"
-              : "Something went wrong",
+              ? dictionary.message.loginFirst
+              : dictionary.errors.wentWrong,
           description:
             response.status === 401
-              ? "Press the button below to login"
-              : "Kindly reload the page.",
+              ? dictionary.message.loginFirst
+              : dictionary.errors.reload,
           action:
             response.status === 401 ? (
               <ToastAction
                 className="rounded-md border border-white/40 px-3 py-1"
-                altText="Try again"
+                altText={dictionary.message.tryAgain}
                 onClick={() => {
                   signIn("google");
                 }}
               >
-                Sign In
+                {dictionary.message.signIn}
               </ToastAction>
             ) : (
               <ToastAction
                 className="rounded-md border border-white/40 px-3 py-1"
-                altText="Reload"
+                altText={dictionary.message.reload}
               >
-                Reload
+                {dictionary.message.reload}
               </ToastAction>
             ),
         };
@@ -81,7 +80,7 @@ export function Pricing({
           variant: "destructive",
           action: error.action,
         });
-        throw new Error("Something went wrong");
+        throw new Error(dictionary.errors.wentWrong);
       }
 
       const { sessionId } = await response.json();
@@ -130,7 +129,8 @@ export function Pricing({
               <p className="font-sans text-sm">{allProducts[0].description}</p>
               <p className="mt-1 font-sans text-2xl">
                 {/* @ts-expect-error nikhil change this later*/}€
-                {allProducts[0].default_price?.unit_amount / 100} / 5 credits
+                {allProducts[0].default_price?.unit_amount / 100} / 5{" "}
+                {dictionary.message.credits}
               </p>
               <button
                 onClick={() => {
@@ -163,7 +163,8 @@ export function Pricing({
               <p className="font-sans text-sm">{allProducts[1].description}</p>
               <p className="mt-1 font-sans text-2xl">
                 {/* @ts-expect-error nikhil change this later*/}€
-                {allProducts[1].default_price?.unit_amount / 100} / 25 credits
+                {allProducts[1].default_price?.unit_amount / 100} / 25{" "}
+                {dictionary.message.credits}
               </p>
               <button
                 onClick={() => {
@@ -201,7 +202,8 @@ export function Pricing({
             <p className="font-sans text-sm">{allProducts[2].description}</p>
             <p className="mt-1 font-sans text-2xl">
               {/* @ts-expect-error nikhil change this later*/}€
-              {allProducts[2].default_price?.unit_amount / 100} / 50 credits
+              {allProducts[2].default_price?.unit_amount / 100} / 50{" "}
+              {dictionary.message.credits}
             </p>
             <button
               onClick={() => {

@@ -143,5 +143,30 @@
     "btn": "Generar imagen",
     "uploadGarmentTypeInput": "Por favor, sube un tipo de prenda",
     "downloadBtn": "Descargar imagen"
+  },
+  "errors": {
+    "wentWrong": "Algo salió mal",
+    "loginBtn": "Presiona el botón de abajo para iniciar sesión",
+    "reload": "Por favor, recarga la página",
+    "uploadFailed": "Error al subir la imagen",
+    "missingInput": "Falta entrada",
+    "selectGarmentType": "Por favor, selecciona el tipo de prenda",
+    "uploadGarmentImage": "Por favor, sube una imagen de la prenda",
+    "pleaseEnterPrompt": "Por favor, ingresa una descripción",
+    "failedGeneration": "Error al generar la imagen",
+    "statusCheck": "Error al verificar el estado"
+  },
+  "success": {
+    "title": "Éxito",
+    "upload": "Subida exitosa",
+    "uploadDescription": "Imagen subida con éxito.",
+    "imageGenerated": "¡Imagen generada con éxito!"
+  },
+  "message": {
+    "signIn": "Iniciar sesión",
+    "loginFirst": "Por favor, inicia sesión primero",
+    "tryAgain": "Intentar de nuevo",
+    "reload": "Recargar",
+    "credits": "Créditos"
   }
 }

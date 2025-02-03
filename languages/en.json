@@ -151,6 +151,8 @@
   },
   "errors": {
     "wentWrong": "Something went wrong",
+    "loginBtn": "Press the button below to login",
+    "reload": "Kindly reload the page",
     "uploadFailed": "Failed to upload image",
     "missingInput": "missing Input",
     "selectGarmentType": "Please select the garment type",
@@ -164,5 +166,12 @@
     "upload": "Upload successfull",
     "uploadDescription": "Image uploaded successfully.",
     "imageGenerated": "Image generated successfully!"
+  },
+  "message": {
+    "signIn": "Sign In",
+    "loginFirst": "Kindly login first",
+    "tryAgain": "Try again",
+    "reload": "Reload",
+    "credits": "Credits"
   }
 }
