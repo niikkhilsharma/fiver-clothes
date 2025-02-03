@@ -3,6 +3,8 @@ import prisma from "@/lib/prisma";
 import { auth } from "@/auth";
 import { reduceUserCredits } from "@/utils/db/actions";
 
+export const maxDuration = 30;
+
 const HUHU_API_KEY = process.env.HUHU_API_KEY;
 const HUHU_API_URL = process.env.HUHU_API_URL!;
 
