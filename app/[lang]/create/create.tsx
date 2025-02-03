@@ -33,9 +33,13 @@ export default function Create({
   const [currentModelImageUrl, setCurrentModelImageUrl] = useState<
     string | null
   >(null);
-  const [garmentType, setGarmentType] = useState<string | null>(null);
+  const [garmentType, setGarmentType] = useState<"Top" | "Bottom" | "Full">(
+    "Top",
+  );
   const [prompt, setPrompt] = useState<string>("");
-  const [cameraAngle, setCameraAngle] = useState<string>("front");
+  const [cameraAngle, setCameraAngle] = useState<
+    "front" | "side" | "back" | "3/4"
+  >("front");
 
   const [isLoading, setIsLoading] = useState(false);
   const [jobStatus, setJobStatus] = useState<string | null>(null);
@@ -300,10 +304,13 @@ export default function Create({
 
         <ImageGallery images={garmentImages} setImgUrl={setGarmentImgUrl} />
 
+        <p className="-mb-4 mt-4 text-sm">Clothe Type:</p>
         <Label htmlFor="garment_type" className="mt-2 hover:cursor-pointer">
           <Select
             defaultValue="Top"
-            onValueChange={(value) => setGarmentType(value)}
+            onValueChange={(value: "Top" | "Bottom" | "Full") =>
+              setGarmentType(value)
+            }
           >
             <SelectTrigger className="mt-4 w-full font-sans focus:ring-gray-300">
               <SelectValue
@@ -372,7 +379,9 @@ export default function Create({
           </Label>
           <Select
             value={cameraAngle}
-            onValueChange={(value) => setCameraAngle(value)}
+            onValueChange={(value: "front" | "side" | "back" | "3/4") =>
+              setCameraAngle(value)
+            }
           >
             <SelectTrigger className="w-full font-sans focus:ring-gray-300">
               <SelectValue placeholder="Select camera angle" />
@@ -390,7 +399,7 @@ export default function Create({
           className="mt-4 w-full"
           variant={"outline"}
           onClick={handleReplicateGenerate}
-          disabled={isLoading || !garmentType || !garmentImgUrl || !prompt}
+          disabled={isLoading || !prompt || !cameraAngle}
         >
           {isLoading ? "Generating..." : "Generate Image"}
         </Button>
