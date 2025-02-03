@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "https://getpolara.ai/assets/preview.png",
+        url: "https://getpolara.ai/assets/logo.jpg",
         alt: "GetPolara AI preview image",
       },
     ],
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     title: "Try On Clothes Virtually with AI | GetPolara.ai",
     description:
       "Upload your image and see yourself wearing any outfit with AI! GetPolara.ai lets you visualize how clothes look on you before buying. Try it now!",
-    images: ["https://getpolara.ai/assets/preview.png"],
+    images: ["https://getpolara.ai/assets/logo.jpg"],
   },
 };
 

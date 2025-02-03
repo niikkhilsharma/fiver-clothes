@@ -37,7 +37,8 @@ export default function Header({
             <motion.li
               className={cn(
                 "relative flex h-3/4 items-center justify-center",
-                link.hash === "/" && `text-white ${merriweather.className}`,
+                link.hash === "/" &&
+                  `font-extrabold text-black dark:text-white ${merriweather.className}`,
               )}
               key={link.hash}
               initial={{ y: -100, opacity: 0 }}
