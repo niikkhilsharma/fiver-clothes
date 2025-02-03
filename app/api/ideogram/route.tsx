@@ -15,7 +15,6 @@ export async function GET() {
   try {
     const response = await fetch(url, options);
     const data = await response.json();
-    console.log(data);
     return NextResponse.json(data);
   } catch (error) {
     console.error(error);

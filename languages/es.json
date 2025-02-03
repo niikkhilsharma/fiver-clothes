@@ -117,5 +117,31 @@
       "1": "Acerca de este sitio web:",
       "2": "construido con React & Next.js (App Router & Server Actions), TypeScript, Tailwind CSS, Framer Motion, React Email & Resend, hosting en Vercel."
     }
+  },
+  "create": {
+    "garmentUploadHeading": "Por favor, sube o selecciona una prenda:",
+    "garmentInputHeading": "La prenda de entrada se mostrará aquí.",
+    "modelUploadHeading": "",
+    "modelInputHeading": "",
+    "garmentTypeLabel": "Tipo de ropa:",
+    "garmentType": {
+      "top": "Parte superior",
+      "bottom": "Parte inferior",
+      "fullBody": "Cuerpo completo"
+    },
+    "generatedImage": "Imagen generada",
+    "generatedImageInputHeading": "La imagen generada se mostrará aquí",
+    "stabilityPromptLabel": "Descripción del prompt",
+    "cameraAngleLabel": "Ángulo de la cámara:",
+    "cameraAngle": {
+      "front": "Frente",
+      "side": "Lateral",
+      "back": "Espalda",
+      "3/4": "Ángulo 3/4"
+    },
+    "generatingLoader": "Generando...",
+    "btn": "Generar imagen",
+    "uploadGarmentTypeInput": "Por favor, sube un tipo de prenda",
+    "downloadBtn": "Descargar imagen"
   }
 }

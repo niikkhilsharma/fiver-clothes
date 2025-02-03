@@ -265,7 +265,7 @@ export default function Create({
       {/* Garment Upload Section */}
       <div className="w-full sm:w-[48%] md:w-[31%]">
         <p className="font-sans font-medium md:h-12 lg:h-auto">
-          Please upload or select a garment:
+          {dictionary.create.garmentUploadHeading}
         </p>
         <Label htmlFor="garment" className="mt-2 hover:cursor-pointer">
           <div className="mt-2 flex h-[26rem] flex-col items-center justify-center gap-2 rounded-lg border bg-white font-sans font-bold dark:bg-gray-900/80">
@@ -283,7 +283,7 @@ export default function Create({
               <div className="flex flex-col items-center justify-center gap-2 p-2 text-xs">
                 <ImageIcon />
                 <p className="text-center">
-                  Input Garment Would be displayed here.
+                  {dictionary.create.garmentInputHeading}
                 </p>
               </div>
             )}
@@ -304,7 +304,9 @@ export default function Create({
 
         <ImageGallery images={garmentImages} setImgUrl={setGarmentImgUrl} />
 
-        <p className="-mb-4 mt-4 text-sm">Clothe Type:</p>
+        <p className="-mb-4 mt-4 text-sm">
+          {dictionary.create.garmentTypeLabel}
+        </p>
         <Label htmlFor="garment_type" className="mt-2 hover:cursor-pointer">
           <Select
             defaultValue="Top"
@@ -319,9 +321,15 @@ export default function Create({
               />
             </SelectTrigger>
             <SelectContent className="font-sans">
-              <SelectItem value="Top">Top</SelectItem>
-              <SelectItem value="Bottom">Bottom</SelectItem>
-              <SelectItem value="Full body">Full Body</SelectItem>
+              <SelectItem value="Top">
+                {dictionary.create.garmentType.top}
+              </SelectItem>
+              <SelectItem value="Bottom">
+                {dictionary.create.garmentType.bottom}
+              </SelectItem>
+              <SelectItem value="Full body">
+                {dictionary.create.garmentType.fullBody}
+              </SelectItem>
             </SelectContent>
           </Select>
         </Label>
@@ -330,7 +338,7 @@ export default function Create({
       {/* Replicate Generated Image Section */}
       <div className="w-full sm:max-w-80 md:w-[31%]">
         <p className="font-sans font-medium md:h-12 lg:h-auto">
-          Replicate Generated Image:
+          {dictionary.create.generatedImage}
         </p>
 
         <div className="mt-2 flex h-[26rem] flex-col items-center justify-center gap-2 rounded-lg border bg-white font-sans font-bold dark:bg-gray-900/80">
@@ -349,7 +357,7 @@ export default function Create({
             <div className="flex flex-col items-center justify-center gap-2 p-2 text-xs">
               <ImageIcon />
               <p className="text-center">
-                Replicate generated image will be displayed here.
+                {dictionary.create.generatedImageInputHeading}
               </p>
             </div>
           )}
@@ -361,7 +369,7 @@ export default function Create({
 
         <div className="mt-4">
           <Label htmlFor="prompt" className="mb-2 block">
-            Description Prompt:
+            {dictionary.create.stabilityPromptLabel}
           </Label>
           <Input
             type="text"
@@ -375,7 +383,7 @@ export default function Create({
 
         <div className="mt-4">
           <Label htmlFor="camera_angle" className="mb-2 block">
-            Camera Angle:
+            {dictionary.create.cameraAngleLabel}
           </Label>
           <Select
             value={cameraAngle}
@@ -387,10 +395,18 @@ export default function Create({
               <SelectValue placeholder="Select camera angle" />
             </SelectTrigger>
             <SelectContent className="font-sans">
-              <SelectItem value="front">Front</SelectItem>
-              <SelectItem value="side">Side</SelectItem>
-              <SelectItem value="back">Back</SelectItem>
-              <SelectItem value="3/4">3/4 Angle</SelectItem>
+              <SelectItem value="front">
+                {dictionary.create.cameraAngle.front}
+              </SelectItem>
+              <SelectItem value="side">
+                {dictionary.create.cameraAngle.side}
+              </SelectItem>
+              <SelectItem value="back">
+                {dictionary.create.cameraAngle.back}
+              </SelectItem>
+              <SelectItem value="3/4">
+                {dictionary.create.cameraAngle["3/4"]}
+              </SelectItem>
             </SelectContent>
           </Select>
         </div>
@@ -401,14 +417,16 @@ export default function Create({
           onClick={handleReplicateGenerate}
           disabled={isLoading || !prompt || !cameraAngle}
         >
-          {isLoading ? "Generating..." : "Generate Image"}
+          {isLoading
+            ? dictionary.create.generatingLoader
+            : dictionary.create.btn}
         </Button>
       </div>
 
       {/* Current Model Generated Image Section */}
       <div className="w-full sm:max-w-80 md:w-[31%]">
         <p className="font-sans font-medium md:h-12 lg:h-auto">
-          Current Model Generated Image:
+          {dictionary.create.generatedImage}
         </p>
 
         <div className="mt-2 flex h-[26rem] flex-col items-center justify-center gap-2 rounded-lg border bg-white font-sans font-bold dark:bg-gray-900/80">
@@ -427,7 +445,7 @@ export default function Create({
             <div className="flex flex-col items-center justify-center gap-2 p-2 text-xs">
               <ImageIcon />
               <p className="text-center">
-                Current model generated image will be displayed here.
+                {dictionary.create.generatedImageInputHeading}
               </p>
             </div>
           )}
@@ -441,14 +459,16 @@ export default function Create({
             isLoading || !garmentType || !garmentImgUrl || !replicateImageUrl
           }
         >
-          {isLoading ? "Processing..." : "Generate with Current Model"}
+          {isLoading
+            ? dictionary.create.generatingLoader
+            : dictionary.create.btn}
         </Button>
         <Button
           className="mt-4 w-full dark:text-white"
           onClick={handleDownloadImage}
           disabled={currentModelImageUrl ? false : true}
         >
-          Download Image
+          {dictionary.create.downloadBtn}
         </Button>
       </div>
     </div>

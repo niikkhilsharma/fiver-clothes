@@ -79,11 +79,23 @@ export type languageDictionaryType = {
   create: {
     garmentUploadHeading: string;
     garmentInputHeading: string;
+    garmentTypeLabel: string;
     modelUploadHeading: string;
     modelInputHeading: string;
+    garmentType: { top: string; bottom: string; fullBody: string };
     generatedImage: string;
     generatedImageInputHeading: string;
+    stabilityPromptLabel: string;
+    cameraAngleLabel: string;
+    cameraAngle: {
+      front: string;
+      side: string;
+      back: string;
+      "3/4": string;
+    };
+    generatingLoader: string;
     btn: string;
     uploadGarmentTypeInput: string;
+    downloadBtn: string;
   };
 };

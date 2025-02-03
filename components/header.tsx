@@ -21,7 +21,6 @@ export default function Header({
 }) {
   const { activeSection, setActiveSection, setTimeOfLastClick } =
     useActiveSectionContext();
-  console.log(dictionary);
   const links = dictionary.header.links;
 
   return (

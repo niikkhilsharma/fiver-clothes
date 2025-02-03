@@ -63,7 +63,6 @@ export async function POST(req: NextRequest) {
 
     // @ts-expect-error output has some error
     const text = await new Response(output).text();
-    console.log(text);
     return NextResponse.json({
       imageUrl: text,
       message: "Image generated successfully",

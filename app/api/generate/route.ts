@@ -3,7 +3,7 @@ import prisma from "@/lib/prisma";
 import { auth } from "@/auth";
 import { reduceUserCredits } from "@/utils/db/actions";
 
-export const maxDuration = 30;
+export const maxDuration = 60;
 
 const HUHU_API_KEY = process.env.HUHU_API_KEY;
 const HUHU_API_URL = process.env.HUHU_API_URL!;
@@ -40,7 +40,6 @@ export async function POST(request: Request) {
     const body = await request.json();
     const { garmentType, garmentImgUrl, modelImgUrl, modelType } = body;
 
-    console.log(garmentType, garmentImgUrl, modelImgUrl, modelType);
     if (!garmentType || !garmentImgUrl || !modelImgUrl) {
       return NextResponse.json(
         { error: "Missing required fields" },

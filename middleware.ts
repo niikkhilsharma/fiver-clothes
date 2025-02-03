@@ -22,11 +22,9 @@ function getLocale(request: NextRequest): string | undefined {
 const { auth } = NextAuth(authConfig);
 export default auth(async function middleware(req) {
   const pathname = req.nextUrl.pathname;
-  console.log(pathname, "from middleware");
 
   // Early return if it's an API route
   if (pathname.startsWith("/api/")) {
-    console.log("redirecting");
     return NextResponse.next();
   }
 
