@@ -148,5 +148,21 @@
     "btn": "Generate Image",
     "uploadGarmentTypeInput": "Please Upload a garment type",
     "downloadBtn": "Download Image"
+  },
+  "errors": {
+    "wentWrong": "Something went wrong",
+    "uploadFailed": "Failed to upload image",
+    "missingInput": "missing Input",
+    "selectGarmentType": "Please select the garment type",
+    "uploadGarmentImage": "Please upload garment image",
+    "pleaseEnterPrompt": "Please enter a description prompt",
+    "failedGeneration": "Failed to generated image",
+    "statusCheck": "Failed to check status"
+  },
+  "success": {
+    "title": "success",
+    "upload": "Upload successfull",
+    "uploadDescription": "Image uploaded successfully.",
+    "imageGenerated": "Image generated successfully!"
   }
 }

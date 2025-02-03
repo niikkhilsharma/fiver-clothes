@@ -56,15 +56,14 @@ export default function Create({
       const cloudinaryUrl = await uploadToCloudinary(file);
       setUrl(cloudinaryUrl);
       toast({
-        title: "Upload Successful",
-        description: "Image uploaded successfully.",
+        title: dictionary.success.upload,
+        description: dictionary.success.uploadDescription,
       });
     } catch (error) {
       console.error("Upload error:", error);
       toast({
         variant: "destructive",
-        title: "Upload Failed",
-        description: "Failed to upload image. Please try again.",
+        title: dictionary.errors.uploadFailed,
       });
     } finally {
       setIsLoading(false);
@@ -75,24 +74,24 @@ export default function Create({
     if (!garmentType) {
       toast({
         variant: "destructive",
-        title: "Missing Input",
-        description: "Please select the garment type.",
+        title: dictionary.errors.missingInput,
+        description: dictionary.errors.selectGarmentType,
       });
       return false;
     }
     if (!garmentImgUrl) {
       toast({
         variant: "destructive",
-        title: "Missing Input",
-        description: "Please upload the garment image.",
+        title: dictionary.errors.missingInput,
+        description: dictionary.errors.uploadGarmentImage,
       });
       return false;
     }
     if (!prompt.trim()) {
       toast({
         variant: "destructive",
-        title: "Missing Input",
-        description: "Please enter a description prompt.",
+        title: dictionary.errors.missingInput,
+        description: dictionary.errors.pleaseEnterPrompt,
       });
       return false;
     }
@@ -130,8 +129,8 @@ export default function Create({
       setReplicateImageUrl(data.imageUrl);
       setIsLoading(false);
       toast({
-        title: "Success",
-        description: "Replicate image generated successfully!",
+        title: dictionary.success.title,
+        description: dictionary.success.imageGenerated,
       });
     } catch (error) {
       const errorMessage =
@@ -139,8 +138,7 @@ export default function Create({
 
       toast({
         variant: "destructive",
-        title: "Generation Failed",
-        description: errorMessage,
+        title: dictionary.errors.failedGeneration,
       });
 
       setError(errorMessage);
@@ -192,8 +190,7 @@ export default function Create({
 
       toast({
         variant: "destructive",
-        title: "Generation Failed",
-        description: errorMessage,
+        title: dictionary.errors.failedGeneration,
       });
 
       setError(errorMessage);
@@ -222,8 +219,8 @@ export default function Create({
           clearInterval(intervalId);
           setModelImageLoader(false);
           toast({
-            title: "Success",
-            description: "Current model image generated successfully!",
+            title: dictionary.success.title,
+            description: dictionary.success.imageGenerated,
           });
         } else if (data.status === "failed") {
           setIsLoading(false);
@@ -231,8 +228,7 @@ export default function Create({
           clearInterval(intervalId);
           toast({
             variant: "destructive",
-            title: "Generation Failed",
-            description: "Failed to generate image. Please try again.",
+            title: dictionary.errors.failedGeneration,
           });
         }
       } catch (err) {
@@ -243,8 +239,7 @@ export default function Create({
         clearInterval(intervalId);
         toast({
           variant: "destructive",
-          title: "Status Check Failed",
-          description: errorMessage,
+          title: dictionary.errors.statusCheck,
         });
       }
     };

@@ -98,4 +98,19 @@ export type languageDictionaryType = {
     uploadGarmentTypeInput: string;
     downloadBtn: string;
   };
+  errors: {
+    uploadFailed: string;
+    missingInput: string;
+    selectGarmentType: string;
+    uploadGarmentImage: string;
+    pleaseEnterPrompt: string;
+    failedGeneration: string;
+    statusCheck: string;
+  };
+  success: {
+    title: string;
+    imageGenerated: string;
+    upload: string;
+    uploadDescription: string;
+  };
 };
