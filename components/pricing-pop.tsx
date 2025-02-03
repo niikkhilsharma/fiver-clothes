@@ -95,7 +95,7 @@ export default function PricingPopUp({
         const activeProducts = await getAllActiveProductsWithPrice();
         setAllProducts(activeProducts);
       } catch (error) {
-        console.error("Error fetching products:", error);
+        console.log("Error fetching products:", error);
       }
     };
     fetchProducts();

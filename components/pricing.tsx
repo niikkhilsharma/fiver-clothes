@@ -99,7 +99,7 @@ export function Pricing({
         console.log(activeProducts, activeProducts?.length);
         setAllProducts(activeProducts);
       } catch (error) {
-        console.error("Error fetching products:", error);
+        console.log("Error fetching products:", error);
       }
     };
     fetchProducts();

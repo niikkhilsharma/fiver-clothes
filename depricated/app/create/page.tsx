@@ -45,7 +45,7 @@ export default function Create() {
       const cloudinaryUrl = await uploadToCloudinary(file);
       setUrl(cloudinaryUrl);
     } catch (error) {
-      console.error("Upload error:", error);
+      console.log("Upload error:", error);
       toast({
         variant: "destructive",
         title: "Upload Failed",

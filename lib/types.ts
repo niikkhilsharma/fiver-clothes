@@ -123,4 +123,25 @@ export type languageDictionaryType = {
     reload: string;
     credits: string;
   };
+  payment: {
+    verifying: string;
+    failed: {
+      title: string;
+      message: string;
+      returnHome: string;
+      paymentVerification: string;
+    };
+    success: {
+      title: string;
+      confirmation: string;
+      orderDetails: {
+        title: string;
+        productName: string;
+        quantity: string;
+        amount: string;
+      };
+      returnHome: string;
+      goToDashboard: string;
+    };
+  };
 };

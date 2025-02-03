@@ -173,5 +173,26 @@
     "tryAgain": "Try again",
     "reload": "Reload",
     "credits": "Credits"
+  },
+  "payment": {
+    "verifying": "Verifying your payment...",
+    "failed": {
+      "title": "Payment Failed",
+      "message": "Something went wrong with your payment. Please try again.",
+      "returnHome": "Return to Home",
+      "paymentVerification": "Payment verification failed"
+    },
+    "success": {
+      "title": "Payment Successful!",
+      "confirmation": "Confirmation sent to: {{customerEmail}}",
+      "orderDetails": {
+        "title": "Order Details:",
+        "productName": "{{productName}}",
+        "quantity": "Quantity: {{quantity}}",
+        "amount": "Amount: ${{amount}}"
+      },
+      "returnHome": "Return to Home",
+      "goToDashboard": "Go to Dashboard"
+    }
   }
 }

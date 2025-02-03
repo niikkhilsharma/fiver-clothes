@@ -29,8 +29,8 @@ export async function POST(req: Request) {
         },
       ],
       mode: "payment",
-      success_url: `${process.env.VERCEL_PROJECT_PRODUCTION_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${process.env.VERCEL_PROJECT_PRODUCTION_URL}/`,
+      success_url: `${process.env.NEXT_PUBLIC_SITE_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL}/`,
       metadata: { userEmail: userDetails?.user?.email || "", priceId },
     });
 

@@ -14,7 +14,7 @@ export async function GET() {
 
     return NextResponse.json(activeProducts, { status: 200 });
   } catch (error) {
-    console.error("Error retrieving prices:", error);
+    console.log("Error retrieving prices:", error);
     return NextResponse.json(
       { message: "Something went wrong" },
       { status: 500 },

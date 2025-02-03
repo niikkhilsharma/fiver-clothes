@@ -168,5 +168,26 @@
     "tryAgain": "Intentar de nuevo",
     "reload": "Recargar",
     "credits": "Créditos"
+  },
+  "payment": {
+    "verifying": "Verificando tu pago...",
+    "failed": {
+      "title": "Pago fallido",
+      "message": "Algo salió mal con tu pago. Por favor, inténtalo de nuevo.",
+      "returnHome": "Volver a inicio",
+      "paymentVerification": "verificación de pago fallida"
+    },
+    "success": {
+      "title": "¡Pago exitoso!",
+      "confirmation": "Confirmación enviada a: {{customerEmail}}",
+      "orderDetails": {
+        "title": "Detalles del pedido:",
+        "productName": "{{productName}}",
+        "quantity": "Cantidad: {{quantity}}",
+        "amount": "Monto: ${{amount}}"
+      },
+      "returnHome": "Volver a inicio",
+      "goToDashboard": "Ir al panel de control"
+    }
   }
 }

@@ -60,7 +60,7 @@ export default function Create({
         description: dictionary.success.uploadDescription,
       });
     } catch (error) {
-      console.error("Upload error:", error);
+      console.log("Upload error:", error);
       toast({
         variant: "destructive",
         title: dictionary.errors.uploadFailed,

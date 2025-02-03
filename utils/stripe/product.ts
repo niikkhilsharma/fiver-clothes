@@ -130,7 +130,7 @@ export async function createProducts() {
     console.log("Product ID:", premiumProduct.id);
     console.log("Price ID:", premiumPrice.id);
   } catch (error) {
-    console.error("Error creating products:", error);
+    console.log("Error creating products:", error);
   }
 }
 
@@ -166,6 +166,6 @@ export async function deleteAllProducts() {
       "\nAll products and their prices have been deleted successfully!",
     );
   } catch (error) {
-    console.error("Error deleting products:", error);
+    console.log("Error deleting products:", error);
   }
 }
