@@ -32,9 +32,9 @@ export default function Hero({
         <Balancer className="text-center text-3xl font-bold sm:text-start sm:text-2xl md:text-3xl lg:text-4xl">
           {dictionary.hero.title}
         </Balancer>
-        <Balancer className="my-6 text-center text-lg font-semibold sm:text-start sm:text-base lg:text-xl">
+        <div className="my-6 text-center text-lg font-semibold sm:text-start sm:text-base lg:text-xl">
           {dictionary.hero.description}
-        </Balancer>
+        </div>
 
         <div className="mb-10 mt-2 flex justify-center sm:mb-0 sm:justify-start">
           {session.status === "authenticated" ? (
