@@ -5,7 +5,7 @@ import { reduceUserCredits } from "@/utils/db/actions";
 
 export const maxDuration = 60;
 
-const HUHU_API_KEY = process.env.HUHU_API_KEY;
+const HUHU_API_KEY = process.env.HUHU_API_KEY!;
 const HUHU_API_URL = process.env.HUHU_API_URL!;
 
 export async function POST(request: Request) {
@@ -26,13 +26,6 @@ export async function POST(request: Request) {
           "Insufficient credits. Please recharge your account to continue.",
       },
       { status: 403 },
-    );
-  }
-
-  if (!HUHU_API_KEY) {
-    return NextResponse.json(
-      { error: "API key not configured" },
-      { status: 500 },
     );
   }
 

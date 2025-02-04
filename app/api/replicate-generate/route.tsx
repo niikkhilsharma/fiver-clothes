@@ -1,5 +1,6 @@
 import { auth } from "@/auth";
 import prisma from "@/lib/prisma";
+import { reduceUserCredits } from "@/utils/db/actions";
 import { NextRequest, NextResponse } from "next/server";
 import Replicate from "replicate";
 
@@ -63,6 +64,9 @@ export async function POST(req: NextRequest) {
 
     // @ts-expect-error output has some error
     const text = await new Response(output).text();
+
+    await reduceUserCredits({ email: user.email, reduceBy: 1 });
+
     return NextResponse.json({
       imageUrl: text,
       message: "Image generated successfully",
