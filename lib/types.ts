@@ -25,6 +25,13 @@ export type languageDictionaryType = {
     title: string;
     description: string;
     try_now: string;
+    btns: {
+      first: string;
+      second: string;
+      third: string;
+      fourth: string;
+    };
+    hero_contact: { heading: string; content: string; contact_btn: string };
   };
   demo: {
     heading: string;

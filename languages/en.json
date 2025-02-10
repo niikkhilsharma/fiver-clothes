@@ -47,7 +47,18 @@
   "hero": {
     "title": "Turn your boring product photos into realistic AI photo shoots out of the box.",
     "description": "Our deep learning AI delivers studio-quality results in seconds, without the high costs of a professional session.",
-    "try_now": "Start your photo session"
+    "try_now": "Start your photo session",
+    "btns": {
+      "first": "Full Usage Rights",
+      "second": "Scale Instantly",
+      "third": " 24 Hours Delivery",
+      "fourth": "Any product, Any Model, Any Location"
+    },
+    "hero_contact": {
+      "heading": "Need your full catalog transformed?",
+      "content": "Weather you have hundreds or thousands of products, our team will create a custom solution to transform your entire catalog with stunning AI-powered photoshoots at scale.",
+      "contact_btn": "Contact US"
+    }
   },
   "demo": { "heading": " Features That Transform Your Fashion Imagery" },
   "pricing": {

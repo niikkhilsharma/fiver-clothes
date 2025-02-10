@@ -42,7 +42,18 @@
   "hero": {
     "title": "Convierte tus fotos de productos aburridas en sesiones fotográficas realista con IA listas para usar.",
     "description": "Nuestra IA de aprendizaje profundo ofrece resultados de calidad de estudio en segundos, sin los altos costos de una sesión profesional.",
-    "try_now": "Empieza tu sesión de fotos"
+    "try_now": "Empieza tu sesión de fotos",
+    "btns": {
+      "first": "Derechos de uso completo",
+      "second": "Escala al instante",
+      "third": "Entrega en 24 horas",
+      "fourth": "Cualquier producto, cualquier modelo, cualquier ubicación"
+    },
+    "hero_contact": {
+      "heading": "¿Necesitas transformar tu catálogo completo?",
+      "content": "Ya sea que tengas cientos o miles de productos, nuestro equipo creará una solución personalizada para transformar todo tu catálogo con impresionantes sesiones de fotos impulsadas por IA a gran escala.",
+      "contact_btn": "Contáctanos"
+    }
   },
   "demo": { "heading": "Características que Transforman tus Imágenes de Moda" },
   "pricing": {

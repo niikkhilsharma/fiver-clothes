@@ -81,17 +81,18 @@ export default function Hero({
       </div>
       <div className="flex w-1/2 flex-wrap gap-4">
         <Button className="rounded-full bg-background text-xs text-foreground">
-          <Check /> Full Usage Rights
+          <Check />
+          {dictionary.hero.btns.first}
         </Button>
         <Button className="rounded-full bg-background text-xs text-foreground">
           <LaptopMinimalCheck />
-          Scale Instantly
+          {dictionary.hero.btns.second}
         </Button>
         <Button className="rounded-full bg-background text-xs text-foreground">
-          <CircleCheckBig /> 24 Hours Delivery
+          <CircleCheckBig /> {dictionary.hero.btns.third}
         </Button>
         <Button className="rounded-full bg-background text-xs text-foreground">
-          <Clock8 /> Any product, Any Model, Any Location
+          <Clock8 /> {dictionary.hero.btns.fourth}
         </Button>
       </div>
     </div>

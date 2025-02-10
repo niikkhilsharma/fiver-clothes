@@ -20,15 +20,14 @@ const HeroContact = ({
       ref={ref}
     >
       <h1 className="text-center text-3xl font-bold md:text-4xl">
-        Need your full catalog transformed?
+        {dictionary.hero.hero_contact.heading}
       </h1>
       <p className="mx-auto my-8 max-w-[80ch] text-center md:max-w-prose">
-        Weather you have hundreds or thousands of products, our team will create
-        a custom solution to transform your entire catalog with stunning
-        AI-powered photoshoots at scale.
+        {dictionary.hero.hero_contact.content}
       </p>
       <Button className="mx-auto flex gap-4 bg-white font-bold text-black hover:bg-gray-300 hover:text-white">
-        Contact US <ArrowRight />
+        {dictionary.hero.hero_contact.contact_btn}
+        <ArrowRight />
       </Button>
     </div>
   );
