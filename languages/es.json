@@ -40,9 +40,9 @@
     ]
   },
   "hero": {
-    "title": "Modelos Generados por IA: Revolucionando la Forma en que Exhibes Ropa",
-    "description": "Genera modelos de IA vistiendo tus productos usando solo una imagen de prenda plana y aumenta tus ventas.",
-    "try_now": "Pruébalo Ahora"
+    "title": "Convierte tus fotos de productos aburridas en sesiones fotográficas realista con IA listas para usar.",
+    "description": "Nuestra IA de aprendizaje profundo ofrece resultados de calidad de estudio en segundos, sin los altos costos de una sesión profesional.",
+    "try_now": "Empieza tu sesión de fotos"
   },
   "demo": { "heading": "Características que Transforman tus Imágenes de Moda" },
   "pricing": {
@@ -66,32 +66,24 @@
     "heading": "Preguntas Frecuentes",
     "questions": [
       {
-        "question": "¿Cómo puedo generar imágenes de ropa para mis marcas de moda?",
-        "answer": "Polara te permite subir fotos de prendas planas y luego generar fotos de IA de modelos vistiendo la ropa simplemente describiéndolas."
+        "question": "¿Qué tipo de fotos debo proporcionar?",
+        "answer": "Puedes enviar fotos claras de tu producto. La iluminación es clave: la luz natural es ideal. Las fotos tomadas con un smartphone funcionan perfectamente siempre que sean nítidas y estén bien enfocadas. Cuantas más fotos proporciones, mejor comprenderá nuestro sistema tu producto, lo que resultará en imágenes de mayor calidad y ángulos más dinámicos en tu sesión final."
       },
       {
-        "question": "¿Qué tipo de fotos debo subir para generar mis imágenes de ropa?",
-        "answer": "Las fotos de ropa colocadas planas o en maniquí funcionan mejor. También puedes usar imágenes de la prenda ya usada por alguien, pero debes recortar la imagen alrededor de la prenda para ayudar a que la IA se enfoque en ella."
+        "question": "¿Cuántas fotos puedo obtener?",
+        "answer": "La cantidad de fotos generadas dependerá del plan que elijas y de los detalles específicos de tu proyecto."
       },
       {
-        "question": "¿Polara mantendrá los patrones y estampados de mis prendas?",
-        "answer": "Los estampados y patrones son difíciles de mantener consistentes en todas las generaciones. Dependiendo de la complejidad de la prenda, es posible que debas generar varias fotos antes de obtener una satisfactoria."
+        "question": "¿Cuánto tiempo tarda en entregarse mis fotos?",
+        "answer": "La mayoría de los proyectos se completan en **segundos**. Sin embargo, durante períodos de alta demanda o para pedidos complejos, el proceso puede tardar hasta **24 horas**. Te mantendremos informado sobre el progreso de tu pedido en todo momento."
       },
       {
-        "question": "¿Puedo usar Polara para probarme ropa personalmente?",
-        "answer": "¡Por el momento no! La herramienta está pensada para marcas como alternativa a las sesiones de fotos."
+        "question": "¿Qué derechos tengo sobre las fotos?",
+        "answer": "Recibes **derechos comerciales completos** sobre todas las imágenes entregadas. Puedes usarlas libremente en tu sitio web, redes sociales, materiales de marketing o publicidad, sin costos adicionales por licencias."
       },
       {
-        "question": "¿Las fotos de IA tendrán defectos?",
-        "answer": "A veces sí. Siempre existirá la probabilidad de generar aberraciones como un brazo extra, ojos deformes, etc. Actualmente, alrededor del 80% de las fotos que generes serán de buena calidad y estamos trabajando constantemente para mejorar estas probabilidades."
-      },
-      {
-        "question": "¿Cuánto cuesta Polara?",
-        "answer": "Nuestros precios comienzan en $0.5 USD por foto generada. Puedes comprar créditos según los necesites o suscribirte a un plan para créditos mensuales. Cuanto mayor sea la suscripción, menor será el costo por crédito. Las suscripciones nos ayudan a prever mejor los costos de computación para ejecutar nuestros modelos de IA y así ofrecer los precios más competitivos posibles."
-      },
-      {
-        "question": "¿Puedo obtener un reembolso si no estoy satisfecho con el resultado?",
-        "answer": "Desafortunadamente, no podemos ofrecer reembolsos ya que los costos incurridos al ejecutar modelos de IA son extremadamente altos (en comparación con el software tradicional). Cuando se genera una foto, pagamos por el tiempo de procesamiento usado por la GPU, independientemente de la calidad de la foto y no podemos pedir un reembolso nosotros mismos. Durante el registro, aceptas renunciar a tu derecho a reembolso por esta razón."
+        "question": "¿Puedo especificar cómo quiero mi sesión fotográfica?",
+        "answer": "¡Por supuesto! Te animamos a aportar tu visión creativa: cuéntanos cómo imaginas tu sesión y la haremos realidad. Si lo prefieres, nuestro equipo de expertos puede aplicar su experiencia profesional para crear imágenes impresionantes que resalten tu producto a la perfección."
       }
     ]
   },

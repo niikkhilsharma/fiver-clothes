@@ -10,6 +10,7 @@ import Footer from "@/components/footer";
 import { getDictionary } from "@/lib/dictionary";
 import { Locale } from "@/i18n.config";
 import { languageDictionaryType } from "@/lib/types";
+import HeroContact from "@/components/hero-contact";
 
 export default async function Home({
   params,
@@ -29,6 +30,7 @@ export default async function Home({
         <SectionDivider />
         <Demo dictionary={dictionary} />
         <SectionDivider />
+        <HeroContact dictionary={dictionary} />
         <Pricing dictionary={dictionary} />
         <SectionDivider />
         <FAQ dictionary={dictionary} />

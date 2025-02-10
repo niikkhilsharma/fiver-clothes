@@ -143,11 +143,9 @@ export function Pricing({
               </button>
               <div className="mt-10 text-sm">
                 <p className="flex items-center gap-2">
-                  <Check size={26} className="mr-1" />
                   {dictionary.pricing.product_1[1]}
                 </p>
                 <p className="mt-4 flex items-center gap-2">
-                  <Check size={34} className="mr-1" />
                   {dictionary.pricing.product_1[2]}
                 </p>
               </div>
@@ -177,15 +175,12 @@ export function Pricing({
               </button>
               <div className="mt-10 text-sm">
                 <p className="flex items-center gap-2">
-                  <Check size={22} className="mr-1" />
                   {dictionary.pricing.product_2[1]}
                 </p>
                 <p className="mt-4 flex items-center gap-2">
-                  <Check size={22} className="mr-1" />
                   {dictionary.pricing.product_2[2]}
                 </p>
                 <p className="mt-4 flex items-center gap-2">
-                  <Check size={22} className="mr-1" />
                   {dictionary.pricing.product_2[3]}
                 </p>
               </div>
@@ -216,15 +211,12 @@ export function Pricing({
             </button>
             <div className="mt-10 text-sm">
               <p className="flex items-center gap-2">
-                <Check size={22} className="mr-1" />
                 {dictionary.pricing.product_3[1]}
               </p>
               <p className="mt-4 flex items-center gap-2">
-                <Check size={22} className="mr-1" />
                 {dictionary.pricing.product_3[2]}
               </p>
               <p className="mt-4 flex items-center gap-2">
-                <Check size={22} className="mr-1" />
                 {dictionary.pricing.product_3[3]}
               </p>
             </div>

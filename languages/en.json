@@ -45,9 +45,9 @@
     ]
   },
   "hero": {
-    "title": "AI-Generated Fashion Models: Revolutionizing How You Showcase Apparel",
-    "description": " Generate AI models wearing your products using only one flat-lay image and drive more sales.",
-    "try_now": "Try Now"
+    "title": "Turn your boring product photos into realistic AI photo shoots out of the box.",
+    "description": "Our deep learning AI delivers studio-quality results in seconds, without the high costs of a professional session.",
+    "try_now": "Start your photo session"
   },
   "demo": { "heading": " Features That Transform Your Fashion Imagery" },
   "pricing": {
@@ -71,32 +71,24 @@
     "heading": "Frequently Asked Questions",
     "questions": [
       {
-        "question": "How can I generate clothing images for my clothing brands?",
-        "answer": "Polara lets you upload flat-lay photos of your items and then generate AI photos of models wearing the clothes by simply describing them."
+        "question": "What type of photos should I provide?",
+        "answer": "You can send clear photos of your product. Lighting is key: natural light is ideal. Photos taken with a smartphone work perfectly as long as they are sharp and well focused. The more photos you provide, the better our system will understand your product, resulting in higher quality images and more dynamic angles in your final session."
       },
       {
-        "question": "What type of photos should I upload to generate my clothing images?",
-        "answer": "Photos of the clothes laid flat or on mannequin work the best. You can also use images of the item already worn by someone, but you should crop the image around the item to help the AI focus on it."
+        "question": "How many photos can I get?",
+        "answer": "The number of photos generated will depend on the plan you choose and the specific details of your project."
       },
       {
-        "question": "Will Polara maintain patterns and prints of my items?",
-        "answer": "Prints and patterns are hard to keep consistent across all generations. Depending on the complexity of the clothing, you may have to generate multiple photos before getting a satisfying one."
+        "question": "How long does it take for my photos to be delivered?",
+        "answer": "Most projects are completed in **seconds**. However, during periods of high demand or for complex orders, the process may take up to **24 hours**. We will keep you informed about the progress of your order at all times."
       },
       {
-        "question": "Can I use Polara to try-on clothes on myself?",
-        "answer": "Not at the moment! The tool has been thought for brands as an alternative to photoshoots."
+        "question": "What rights do I have over the photos?",
+        "answer": "You receive full commercial rights on all images submitted. You can freely use them on your website, social networks, marketing materials or advertising, without additional licensing costs."
       },
       {
-        "question": "Will the AI photos have defects?",
-        "answer": "Sometimes yes. There will always be a probability to generate aberrations such as an extra arm, deformed eyes, etc. Currently, about 80% of photos you generate will be good enough and we are consistently working to improve these odds."
-      },
-      {
-        "question": "How much does Polara cost?",
-        "answer": "Our prices start at $0.5 USD per photo generated. You can buy credits as you need them or subscribe to a plan for monthly credits. The higher the subscription, the lower the cost per credit. Subscriptions help us better forecast compute costs to run our AI models and thus offer the most competitive prices possible."
-      },
-      {
-        "question": "Can I get a refund if I am not satisfied with the output?",
-        "answer": "Unfortunately, we cannot offer refunds as costs incurred running AI models is extremely high (compared to traditional software). When a photo is generated, we pay for the processing time used by the GPU, regardless of the photo quality and cannot ask for a refund ourselves. During sign up you agree to withhold your right to refund for this reason."
+        "question": "Can I specify how I want my photo session?",
+        "answer": "Of course! We encourage you to contribute your creative vision: tell us how you imagine your session and we will make it a reality. If you prefer, our team of experts can apply their professional experience to create stunning images that highlight your product perfectly."
       }
     ]
   },

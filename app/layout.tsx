@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Locale } from "@/i18n.config";
 import { Comfortaa } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 
