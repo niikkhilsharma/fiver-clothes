@@ -41,16 +41,19 @@ export type languageDictionaryType = {
     product_1: {
       "1": string;
       "2": string;
+      tagline: string;
     };
     product_2: {
       "1": string;
       "2": string;
       "3": string;
+      tagline: string;
     };
     product_3: {
       "1": string;
       "2": string;
       "3": string;
+      tagline: string;
     };
   };
   faq: {

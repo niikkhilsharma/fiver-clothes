@@ -65,17 +65,20 @@
     "heading": "Get Started With polara",
     "product_1": {
       "1": "Get credits to try polara on your own clothes",
-      "2": "Pay-as-you-go by purchasing the generation credits you need"
+      "2": "Pay-as-you-go by purchasing the generation credits you need",
+      "tagline": "A basic plan offering 5 credits for our services."
     },
     "product_2": {
       "1": "Monthly generations",
       "2": "Early access to new features",
-      "3": "Priority support"
+      "3": "Priority support",
+      "tagline": "A premium plan offering 50 credits for our services."
     },
     "product_3": {
       "1": "Tailored monthly or annual generations",
       "2": "Overnight batch process hundreds of clothing items",
-      "3": "Dedicated compute infrastructure"
+      "3": "Dedicated compute infrastructure",
+      "tagline": "A standard plan offering 25 credits for our services."
     }
   },
   "faq": {
@@ -107,7 +110,7 @@
     "heading": "Contact me",
     "subHeading": {
       "1": "Please contact me directly at",
-      "2": "example@gmail.com",
+      "2": "info@getpolara.ai",
       "3": "or through this form."
     },
     "toastMessages": {

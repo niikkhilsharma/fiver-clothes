@@ -39,10 +39,13 @@ export default function Contact({
 
       <p className="-mt-6 text-gray-700">
         {dictionary.contact.subHeading[1]}
-        <a className="mx-1 underline" href="mailto:example@gmail.com">
+        <a
+          className="mx-1 underline"
+          href="mailto:info@getpolara.ai"
+          target="_blank"
+        >
           {dictionary.contact.subHeading[2]}
         </a>
-        {dictionary.contact.subHeading[2]}
       </p>
 
       <form

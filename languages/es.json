@@ -60,17 +60,20 @@
     "heading": "Comienza con Polara",
     "product_1": {
       "1": "Obtén créditos para probar Polara con tu propia ropa",
-      "2": "Paga a medida que lo necesites comprando los créditos de generación que necesites"
+      "2": "Paga a medida que lo necesites comprando los créditos de generación que necesites",
+      "tagline": "Un plan básico que ofrece 5 créditos por nuestros servicios."
     },
     "product_2": {
       "1": "Generaciones mensuales",
       "2": "Acceso anticipado a nuevas funciones",
-      "3": "Soporte prioritario"
+      "3": "Soporte prioritario",
+      "tagline": "Un plan premium que ofrece 50 créditos por nuestros servicios"
     },
     "product_3": {
       "1": "Generaciones mensuales o anuales personalizadas",
       "2": "Procesamiento nocturno por lotes de cientos de prendas",
-      "3": "Infraestructura informática dedicada"
+      "3": "Infraestructura informática dedicada",
+      "tagline": "Un plan estándar que ofrece 25 créditos por nuestros servicios."
     }
   },
   "faq": {
@@ -102,7 +105,7 @@
     "heading": "Contáctame",
     "subHeading": {
       "1": "Por favor, contáctame directamente en",
-      "2": "example@gmail.com",
+      "2": "info@getpolara.ai",
       "3": "o a través de este formulario."
     },
     "toastMessages": {

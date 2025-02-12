@@ -126,7 +126,9 @@ export function Pricing({
               className="rounded-2xl border border-gray-300 px-6 py-12 lg:max-w-96"
             >
               <h2 className="text-2xl font-semibold">{allProducts[0].name}</h2>
-              <p className="font-sans text-sm">{allProducts[0].description}</p>
+              <p className="font-sans text-sm">
+                {dictionary.pricing.product_1.tagline}
+              </p>
               <p className="mt-1 font-sans text-2xl">
                 {/* @ts-expect-error nikhil change this later*/}€
                 {allProducts[0].default_price?.unit_amount / 100} / 5{" "}
@@ -158,7 +160,9 @@ export function Pricing({
               className="w-full rounded-2xl border border-gray-300 bg-[#25B1A4] px-6 py-12 text-white"
             >
               <h2 className="text-2xl font-semibold">{allProducts[1].name}</h2>
-              <p className="font-sans text-sm">{allProducts[1].description}</p>
+              <p className="font-sans text-sm">
+                {dictionary.pricing.product_2.tagline}
+              </p>
               <p className="mt-1 font-sans text-2xl">
                 {/* @ts-expect-error nikhil change this later*/}€
                 {allProducts[1].default_price?.unit_amount / 100} / 25{" "}
@@ -194,7 +198,9 @@ export function Pricing({
             className="mt-4 w-full rounded-2xl border border-gray-300 bg-[#082A2B] px-6 py-12 text-white"
           >
             <h2 className="text-2xl font-semibold">{allProducts[2].name}</h2>
-            <p className="font-sans text-sm">{allProducts[2].description}</p>
+            <p className="font-sans text-sm">
+              {dictionary.pricing.product_3.tagline}
+            </p>
             <p className="mt-1 font-sans text-2xl">
               {/* @ts-expect-error nikhil change this later*/}€
               {allProducts[2].default_price?.unit_amount / 100} / 50{" "}
