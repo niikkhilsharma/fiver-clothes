@@ -123,15 +123,16 @@ export function Pricing({
               whileInView={{ x: 0 }}
               transition={{ ease: "easeOut", duration: 1 }}
               viewport={{ once: true }}
-              className="rounded-2xl border border-gray-300 px-6 py-12 lg:max-w-96"
+              className="w-full rounded-2xl border border-gray-300 px-6 py-12 lg:max-w-96"
             >
               <h2 className="text-2xl font-semibold">{allProducts[0].name}</h2>
               <p className="font-sans text-sm">
                 {dictionary.pricing.product_1.tagline}
               </p>
               <p className="mt-1 font-sans text-2xl">
-                {/* @ts-expect-error nikhil change this later*/}€
-                {allProducts[0].default_price?.unit_amount / 100} / 5{" "}
+                {/* @nikhil-ts-expect-error nikhil change this later*/}€{" "}
+                {/* {allProducts[0].default_price?.unit_amount / 100} / 5{" "} */}
+                <span className="mr-1">24.95 / 25</span>
                 {dictionary.message.credits}
               </p>
               <button
@@ -161,10 +162,10 @@ export function Pricing({
             >
               <h2 className="text-2xl font-semibold">{allProducts[1].name}</h2>
               <p className="font-sans text-sm">
-                {dictionary.pricing.product_2.tagline}
+                {dictionary.pricing.product_3.tagline}
               </p>
               <p className="mt-1 font-sans text-2xl">
-                {/* @ts-expect-error nikhil change this later*/}€
+                {/* @ts-expect-error nikhil change this later€ */}€{" "}
                 {allProducts[1].default_price?.unit_amount / 100} / 25{" "}
                 {dictionary.message.credits}
               </p>
@@ -199,7 +200,7 @@ export function Pricing({
           >
             <h2 className="text-2xl font-semibold">{allProducts[2].name}</h2>
             <p className="font-sans text-sm">
-              {dictionary.pricing.product_3.tagline}
+              {dictionary.pricing.product_2.tagline}
             </p>
             <p className="mt-1 font-sans text-2xl">
               {/* @ts-expect-error nikhil change this later*/}€

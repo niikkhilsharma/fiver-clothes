@@ -38,7 +38,7 @@ export async function POST(request: NextRequest) {
       console.log(session, "from session");
 
       const creditAmounts: { [key: number]: number } = {
-        2400: 5,
+        2499: 5,
         9900: 25,
         16000: 50,
       };
