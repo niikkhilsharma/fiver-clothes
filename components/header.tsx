@@ -25,7 +25,7 @@ export default function Header({
   const links = dictionary.header.links;
 
   return (
-    <header className="relative z-[999] overflow-x-hidden">
+    <header className="relative z-[999]">
       <div className="fixed left-4 top-0 hidden items-center justify-center sm:top-6 sm:flex sm:rounded-full">
         <Link href={"/"}>
           <Image
