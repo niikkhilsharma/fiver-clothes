@@ -1,7 +1,7 @@
-import ThemeSwitch from "@/components/theme-switch";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 import { SessionProvider } from "next-auth/react";
+import ThemeSwitch from "@/components/theme-switch";
 import ThemeContextProvider from "@/context/theme-context";
 import { i18n, Locale } from "@/i18n.config";
 
@@ -17,12 +17,12 @@ export default function RootLayout({
   params: { lang: Locale };
 }>) {
   return (
-    <ThemeContextProvider>
-      <main>
+    <main>
+      <ThemeContextProvider>
         <SessionProvider>{children}</SessionProvider>
         <Toaster />
-      </main>
-      <ThemeSwitch />
-    </ThemeContextProvider>
+        {/* <ThemeSwitch /> */}
+      </ThemeContextProvider>
+    </main>
   );
 }
