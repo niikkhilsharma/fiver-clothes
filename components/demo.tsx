@@ -58,7 +58,7 @@ export function Demo({ dictionary }: { dictionary: languageDictionaryType }) {
 
   const images = [
     ["1a.webp", "1b.webp"],
-    ["2a.webp", "2b.webp"],
+    // ["2a.webp", "2b.webp"],
     ["3a.webp", "3b.webp"],
     ["4a.webp", "4b.webp"],
     ["5a.webp", "5b.webp"],
@@ -79,7 +79,7 @@ export function Demo({ dictionary }: { dictionary: languageDictionaryType }) {
           >
             <div
               ref={scrollerRef}
-              className="animate-scroll flex w-max overflow-hidden whitespace-nowrap"
+              className="flex w-max animate-scroll overflow-hidden whitespace-nowrap"
             >
               {images.map((pair, index) => (
                 <div

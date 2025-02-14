@@ -16,7 +16,6 @@
   },
   "header": {
     "links": [
-      { "name": "Polara", "hash": "/", "key": "Polara" },
       {
         "name": "Inicio",
         "hash": "#home",

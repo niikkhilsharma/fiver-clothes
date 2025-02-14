@@ -30,7 +30,7 @@ export default async function Home({
         <SectionDivider />
         <Demo dictionary={dictionary} />
         <SectionDivider />
-        <HeroContact dictionary={dictionary} />
+        {/* <HeroContact dictionary={dictionary} /> */}
         <Pricing dictionary={dictionary} />
         <SectionDivider />
         <FAQ dictionary={dictionary} />
