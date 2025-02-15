@@ -33,6 +33,7 @@ export default function ThemeContextProvider({
   };
 
   useEffect(() => {
+    document.documentElement.classList.add("dark");
     const localTheme = window.localStorage.getItem("theme") as Theme | null;
 
     if (localTheme) {
