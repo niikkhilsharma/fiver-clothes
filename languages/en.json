@@ -122,11 +122,7 @@
     "submitBtn": "Submit"
   },
   "footer": {
-    "allRightReserved": "2030 Polara. All rights reserved.",
-    "subHeading": {
-      "1": "About this website:",
-      "2": "built with React & Next.js (App Router & Server Actions), TypeScript, Tailwind CSS, Framer Motion, React Email & Resend, Vercel hosting."
-    }
+    "allRightReserved": "2030 Polara. All rights reserved."
   },
   "create": {
     "garmentUploadHeading": "Please upload or select a garment:",

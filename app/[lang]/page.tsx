@@ -23,7 +23,7 @@ export default async function Home({
   )) as languageDictionaryType;
 
   return (
-    <div className="px-4 pt-28 sm:pt-36">
+    <div className="overflow-hidden px-4 pt-40 sm:pt-36">
       <ActiveSectionContextProvider>
         <Header dictionary={dictionary} />
         <Hero dictionary={dictionary} />

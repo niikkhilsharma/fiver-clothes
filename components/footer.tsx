@@ -11,12 +11,6 @@ export default function Footer({
       <small className="mb-2 block text-xs">
         &copy; {dictionary.footer.allRightReserved}
       </small>
-      <p className="text-xs">
-        <span className="font-semibold">
-          {dictionary.footer.subHeading[1]}:
-        </span>
-        {dictionary.footer.subHeading[2]}
-      </p>
     </footer>
   );
 }
