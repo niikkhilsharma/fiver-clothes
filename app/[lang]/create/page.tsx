@@ -26,7 +26,7 @@ export default async function CreatePage({
   });
 
   return (
-    <div className="min-h-screen">
+    <div className="absolute top-0 min-h-screen w-full">
       {!(prismaUser?.totalCredits! > 0) ? (
         <PricingPopUp dictionary={dictionary} />
       ) : (

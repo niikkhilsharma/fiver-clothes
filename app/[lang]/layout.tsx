@@ -17,11 +17,10 @@ export default function RootLayout({
   params: { lang: Locale };
 }>) {
   return (
-    <main>
+    <main className="absolute top-0 w-full">
       <ThemeContextProvider>
         <SessionProvider>{children}</SessionProvider>
         <Toaster />
-        {/* <ThemeSwitch /> */}
       </ThemeContextProvider>
     </main>
   );
