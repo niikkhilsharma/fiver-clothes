@@ -75,7 +75,7 @@ export function Demo({ dictionary }: { dictionary: languageDictionaryType }) {
         <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
           <div
             ref={containerRef}
-            className="relative w-full overflow-hidden bg-gray-100 py-10 dark:bg-transparent"
+            className="relative -z-10 w-full overflow-hidden bg-gray-100 py-10 dark:bg-transparent"
           >
             <div
               ref={scrollerRef}

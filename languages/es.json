@@ -18,22 +18,22 @@
     "links": [
       {
         "name": "Inicio",
-        "hash": "#home",
+        "hash": "/es/#home",
         "key": "Home"
       },
       {
         "name": "Demostración",
-        "hash": "#demo",
+        "hash": "/es/#demo",
         "key": "Demo"
       },
       {
         "name": "Precios",
-        "hash": "#pricing",
+        "hash": "/es/#pricing",
         "key": "Pricing"
       },
       {
         "name": "Contacto",
-        "hash": "#contact",
+        "hash": "/es/#contact",
         "key": "Contact"
       }
     ]

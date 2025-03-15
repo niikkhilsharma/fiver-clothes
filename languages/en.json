@@ -18,27 +18,27 @@
     "links": [
       {
         "name": "Home",
-        "hash": "#home",
+        "hash": "/en/#home",
         "key": "Home"
       },
       {
         "name": "Demo",
-        "hash": "#demo",
+        "hash": "/en/#demo",
         "key": "Demo"
       },
       {
         "name": "Pricing",
-        "hash": "#pricing",
+        "hash": "/en/#pricing",
         "key": "Pricing"
       },
       {
         "name": "FAQ",
-        "hash": "#faq",
+        "hash": "/en/#faq",
         "key": "FAQ"
       },
       {
         "name": "Contact",
-        "hash": "#contact",
+        "hash": "/en/#contact",
         "key": "Contact"
       }
     ]
